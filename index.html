@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Durgesh Physics Classes</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f1f5f9;
+      color: #2e2e2e;
+    }
+
+    header {
+      background: linear-gradient(to right, #283593, #64b5f6);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 38px;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 18px;
+      margin-top: 10px;
+      opacity: 0.95;
+    }
+
+    .call-now {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ffca28;
+      color: #000;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .call-now:hover {
+      background: #ffd54f;
+    }
+
+    nav {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    nav a {
+      color: #283593;
+      text-decoration: none;
+      margin: 14px 20px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #0288d1;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 20px;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #283593;
+      margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links.mobile-hidden {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #1a237e;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .info-box, .testimonial, form {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    .testimonial {
+      border-left: 6px solid #ffca28;
+      font-style: italic;
+      padding-left: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input, textarea {
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #f9f9f9;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #42a5f5;
+      outline: none;
+    }
+
+    button {
+      padding: 14px;
+      background: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #1565c0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 320px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .whatsapp-float img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float img:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: linear-gradient(to right, #283593, #64b5f6);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .call-now {
+        font-size: 13px;
+        padding: 8px 14px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .whatsapp-float img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>DURGESH PHYSICS CLASSES</h1>
+    <a href="tel:+917499668944" class="call-now">📞 Call Now</a>
+    <p>Foundation for 9th, 10th, 11th & 12th | NEET | JEE | MHT-CET</p>
+  </header>
+
+  <nav>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About Us</a>
+      <a href="#location">Location</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#register">Register</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="info-box">
+      <p>Welcome to <strong>Durgesh Physics Classes</strong>, your trusted companion in mastering Physics. We provide classes for students of <strong>9th to 12th Standard</strong>, with special coaching for competitive exams like <strong>NEET, JEE, and MHT-CET</strong>.</p>
+      <ul>
+        <li>✅ Strong foundation from basics to advanced concepts</li>
+        <li>✅ Visual demonstrations and interactive classes</li>
+        <li>✅ Notes, assignments, and conceptual tests</li>
+        <li>✅ Weekly test series with analysis</li>
+        <li>✅ Personal attention and doubt-solving</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2>Our Location</h2>
+    <div class="info-box">
+      <p><strong>Address:</strong> Beed Bypass, Chhatrapati Shambhaji Nagar, Maharashtra – 431001</p> 
+      <iframe src="https://www.google.com/maps?q=Beed%20Bypass%20Shambhaji%20Nagar&output=embed" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>Student Testimonials</h2>
+    <div class="testimonial">
+      "Physics became my favorite subject after joining Durgesh Sir's class. His way of teaching is extraordinary!" – <strong>Ankita S.</strong>
+    </div>
+    <div class="testimonial">
+      "Scored 92 in Physics because of consistent practice and great mentorship. Thank you Sir!" – <strong>Rahul K.</strong>
+    </div>
+    <div class="testimonial">
+      "The classes are focused, engaging, and exam-oriented. Highly recommended!" – <strong>Meera J.</strong>
+    </div>
+  </section>
+
+  <section id="register">
+    <h2>Register Now</h2>
+    <form action="https://docs.google.com/forms/d/e/your-form-id/formResponse" method="POST" target="_blank">
+      <input name="entry.1234567890" type="text" placeholder="Your Full Name" required>
+      <input name="entry.0987654321" type="email" placeholder="Your Email" required>
+      <input name="entry.1122334455" type="tel" placeholder="Mobile Number" required>
+      <input name="entry.2233445566" type="text" placeholder="Class (9th, 10th, etc)" required>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p style="text-align:center; margin-top: 10px;">📞 Call us at <strong><a href="tel:+917499668944" style="color:#1e88e5;">+91 74996 68944</a></strong></p>
+  </section>
+
+  <!-- WhatsApp Button -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/917499668944" target="_blank" title="Chat on WhatsApp">
+      <img src="https://img.icons8.com/color/96/000000/whatsapp--v1.png" alt="WhatsApp">
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 Durgesh Physics Classes | All Rights Reserved
+  </footer>	
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registered', reg))
+        .catch(err => console.error('Service Worker failed', err));
+    }
+
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
