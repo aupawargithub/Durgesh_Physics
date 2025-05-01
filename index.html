@@ -23,22 +23,65 @@
     header {
       background: linear-gradient(to right, #283593, #64b5f6);
       color: white;
-      text-align: center;
-      padding: 60px 20px;
-      position: relative;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    header h1 {
-      font-size: 38px;
-      font-weight: 700;
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
-    header p {
-      font-size: 18px;
-      margin-top: 10px;
-      opacity: 0.95;
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
+
+    .header-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: #e0f7fa;
+    }
+
+
+    .call-now {
+      background: #ffca28;
+      color: #000;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-left {
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+
+      .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+
 
     .call-now {
       position: absolute;
@@ -248,9 +291,14 @@ flex-direction: column;
 <body>
 
   <header>
-    <h1>DURGESH PHYSICS CLASSES</h1>
+    <div class="header-left">
+      <img src="durgesh_logo.png" alt="Logo" class="logo">
+      <div>
+        <div class="header-title">DURGESH PHYSICS CLASSES</div>
+        <div class="header-subtitle">Foundation for 9th–12th | NEET | JEE | MHT-CET</div>
+      </div>
+    </div>
     <a href="tel:+917499668944" class="call-now">📞 Call Now</a>
-    <p>Foundation for 9th, 10th, 11th & 12th | NEET | JEE | MHT-CET</p>
   </header>
 
   <nav>
