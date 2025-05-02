@@ -343,26 +343,29 @@ flex-direction: column;
 <!-- Place this in the <head> or before your section -->
 <style>
   #hero {
-    height: 80vh;
     width: 100%;
-    margin: 0 auto;
+    height: auto;
+    aspect-ratio: 16 / 9; /* maintains image proportions */
     background-image: url('durgesh_Image.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  /* Mobile-friendly tweak */
   @media (max-width: 768px) {
     #hero {
+      aspect-ratio: auto; /* allow it to shrink naturally on mobile */
+      height: auto;
       background-size: contain;
-      background-repeat: no-repeat;
       background-position: top;
     }
   }
 </style>
+
+<section id="hero"></section>
+
 
 <!-- Your Hero Section -->
 <section id="hero"></section>
