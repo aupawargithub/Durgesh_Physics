@@ -354,13 +354,15 @@ flex-direction: column;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
-  @media (max-width: 768px) {
-    #hero {
-      aspect-ratio: 3 / 4; /* taller on mobile for full image view */
-      background-size: contain;
-      background-position: top;
-    }
+@media (max-width: 768px) {
+  #hero {
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
+}
+
 </style>
 <!-- Your Hero Section -->
 <section id="hero"></section>
