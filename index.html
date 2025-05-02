@@ -228,6 +228,30 @@
       border-radius: 12px;
       margin-top: 15px;
     }
+.scroll-to-top {
+  position: fixed;
+  bottom: 90px; /* Adjust to avoid overlap with WhatsApp */
+  right: 20px;
+  background-color: #444; /* Dark gray color */
+  color: #fff;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  display: none; /* Hidden initially */
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  background-color: #000;
+  transform: scale(1.1);
+}
+
 
     .whatsapp-float {
       position: fixed;
@@ -317,6 +341,20 @@ flex-direction: column;
     </div>
   </nav>
 
+<section id="hero" style="
+  height: 80vh;
+  width: 100%;
+  margin: 0 auto;
+  background-image: url('durgesh_Image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+">
+</section>
+
+
   <section id="about">
     <h2>About Us</h2>
     <div class="info-box">
@@ -392,7 +430,7 @@ flex-direction: column;
 
   <section id="register">
     <h2>Register Now</h2>
-    <form action="https://docs.google.com/forms/d/e/your-form-id/formResponse" method="POST" target="_blank">
+  <form onsubmit="handleContactForm(event)">
       <input name="entry.1234567890" type="text" placeholder="Your Full Name" required>
       <input name="entry.0987654321" type="email" placeholder="Your Email" required>
       <input name="entry.1122334455" type="tel" placeholder="Mobile Number" required>
@@ -403,14 +441,36 @@ flex-direction: column;
 
   <section id="contact">
     <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
+    
+<form onsubmit="handleContactForm(event)">
+      <input name="entry.1234567890" type="text" placeholder="Your Name" required />
+     <input name="entry.0987654321" type="email" placeholder="Your Email" required />
       <textarea rows="4" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
     <p style="text-align:center; margin-top: 10px;">📞 Call us at <strong><a href="tel:+917499668944" style="color:#1e88e5;">+91 74996 68944</a></strong></p>
   </section>
+<div id="toast" style="
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-weight: bold;
+">
+  Information sent successfully!
+</div>
+
+<a href="#" class="scroll-to-top" id="scrollToTopBtn" title="Go to top">
+  &#8679;
+</a>
+
 
   <!-- WhatsApp Button -->
   <div class="whatsapp-float">
@@ -423,19 +483,53 @@ flex-direction: column;
     &copy; 2025 Durgesh Physics Classes | All Rights Reserved
   </footer>	
 
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker registered', reg))
-        .catch(err => console.error('Service Worker failed', err));
-    }
+ <!-- Service Worker and Form Handling -->
+<script>
+  // Register Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.error('Service Worker failed', err));
+  }
 
-    function toggleMenu() {
-      const navLinks = document.getElementById("navLinks");
-      navLinks.classList.toggle("active");
+  // Toggle menu for mobile nav
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("active");
+  }
+function handleContactForm(event) {
+    event.preventDefault();
+
+    // Show the toast
+    const toast = document.getElementById("toast");
+    toast.style.display = "block";
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 3000);
+
+    // Optionally clear form
+    event.target.reset();
+  }
+ const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollToTopBtn.style.display = "block";
+    } else {
+      scrollToTopBtn.style.display = "none";
     }
-  </script>
+  });
+
+  scrollToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
 
 </body>
 </html>
