@@ -124,35 +124,91 @@
       color: #0288d1;
     }
 
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      position: absolute;
-      top: 14px;
-      right: 20px;
-    }
+.menu-toggle {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1000;
+}
 
-    .menu-toggle div {
-      width: 25px;
-      height: 3px;
-      background-color: #283593;
-      margin: 4px 0;
-      transition: all 0.3s ease;
-    }
+.menu-toggle div {
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  background-color: #283593;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  left: 3px;
+}
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+/* Position individual bars */
+.menu-toggle div:nth-child(1) { top: 6px; }
+.menu-toggle div:nth-child(2) { top: 13.5px; }
+.menu-toggle div:nth-child(3) { top: 21px; }
 
-    .nav-links.mobile-hidden {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      text-align: center;
-    }
+/* Cross transform */
+.menu-toggle.open div:nth-child(1) {
+  transform: rotate(45deg);
+  top: 13.5px;
+}
+
+.menu-toggle.open div:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open div:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 13.5px;
+}
+    /* === Navigation Base === */
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* === Mobile View (≤ 767px) === */
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none; /* hidden by default */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: white; /* optional */
+    position: absolute;
+    top: 60px; /* adjust according to your header */
+    left: 0;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+/* === Desktop View (≥ 768px) === */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+  }
+}
+
 
     section {
       max-width: 1000px;
@@ -329,12 +385,12 @@ flex-direction: column;
   </header>
 
   <nav>
-    <div class="menu-toggle" onclick="toggleMenu()">
+     <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
       <div></div>
       <div></div>
       <div></div>
     </div>
-    <div class="nav-links" id="navLinks">
+  <div class="nav-links mobile-hidden" id="navLinks">
       <a href="#about">About Us</a>
       <a href="#location">Location</a>
       <a href="#testimonials">Testimonials</a>
@@ -512,7 +568,13 @@ flex-direction: column;
   // Toggle menu for mobile nav
   function toggleMenu() {
     const navLinks = document.getElementById("navLinks");
+    const menuToggle = document.getElementById("menuToggle");
+
     navLinks.classList.toggle("active");
+    navLinks.classList.toggle("mobile-hidden");
+
+    // Toggle cross/hamburger icon
+    menuToggle.classList.toggle("open");
   }
 function handleContactForm(event) {
     event.preventDefault();
