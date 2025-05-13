@@ -242,6 +242,68 @@
     ul li {
       margin-bottom: 10px;
     }
+#courses {
+  padding: 40px 20px;
+  background: #f1f5f9;
+ margin-bottom: 40px;
+}
+#courses h2 {
+  text-align: center;
+ 
+}
+.tabs {
+  max-width: 1000px;
+background: #ffffff;
+      border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin: auto;
+}
+.tab-list {
+  display: flex;
+justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 20px;
+  border-bottom: 2px 88ACE0;
+  padding-left: 0;
+}
+.tab-item {
+  padding: 10px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #555;
+  border-radius: 4px 4px 0 0;
+  background: #e0e0e0;
+  transition: background 0.3s;
+}
+.tab-item.active {
+  background: #ADD8E6;
+  color: #1e88e5;
+  border-bottom: 2px solid white;
+}
+.tab-item:hover:not(.active) {
+  background: #d5d5d5;
+}
+.tab-content {
+  background: white;
+   border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+ padding: 20px;
+  
+}
+.content-panel {
+  display: none;
+}
+.content-panel.active {
+  display: block;
+}
+.content-panel h3 {
+  margin-bottom: 20px;
+ text-align: center;
+  color: #1565c0;
+}
 
     .testimonial {
       border-left: 6px solid #ffca28;
@@ -397,6 +459,7 @@ flex-direction: column;
     </div>
   <div class="nav-links mobile-hidden" id="navLinks">
       <a href="#about">About Us</a>
+      <a href="#courses">Our Courses</a>
       <a href="#location">Location</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#register">Register Now</a>
@@ -446,6 +509,61 @@ flex-direction: column;
       </ul>
     </div>
   </section>
+	<section id="courses">
+  <h2>Our Courses</h2>
+  <div class="tabs">
+    <ul class="tab-list">
+
+      <li class="tab-item active" data-target="ssc">9th & 10th (SSC, CBSE & NCERT)</li>
+
+      <li class="tab-item" data-target="hsc">11th & 12th (HSC & CBSE)</li>
+      <li class="tab-item" data-target="mhtcet">MHT-CET</li>
+      <li class="tab-item" data-target="jee">JEE</li>
+      <li class="tab-item" data-target="neet">NEET</li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="ssc" class="content-panel active">
+        <h3>9th & 10th (SSC, CBSE & NCERT)</h3>
+       <ul>
+        <li>✅ Complete syllabus coverage, weekly tests & doubt-solving tailored to SSC pattern.</li>
+          <li>✅ Build a strong foundation for 9th and 10th CBSE with our comprehensive courses that make learning easy.</li>
+          <li>✅ NCERT textbook–aligned coaching, emphasis on fundamentals and exemplar problems.</li>
+        </ul>
+      </div>
+       
+      <div id="hsc" class="content-panel">
+        <h3>11th & 12th (HSC & CBSE)</h3>
+      <ul>
+        <li>✅ Advanced problem solving for Maharashtra HSC, exam-style practice & past-paper drills.</li>
+       <li>✅ Excel in your 12th CBSE board exams with our expert-led courses designed to boost performance.</li>
+      </ul>
+      </div>
+      <div id="mhtcet" class="content-panel">
+        <h3>MHT-CET</h3>
+      <ul>
+        <li>✅ Focused crash courses, mock tests & strategy sessions to ace the state CET exam.</li>
+          <li>✅ Join our result-driven batch designed exclusively for MHT-CET toppers.</li>
+         </ul>
+      </div>
+      <div id="jee" class="content-panel">
+        <h3>JEE (Main & Advanced)</h3>
+       <ul>
+        <li>✅ Intensive preparation with high-level problems, multiple full-length mocks & analysis.</li>
+       <li>✅ Our structured modules and test series give you a competitive edge for JEE success.</li>
+          </ul>
+      </div>
+      <div id="neet" class="content-panel">
+        <h3>NEET</h3>
+      <ul>
+        <li>✅ Concept clarity sessions, regular tests & full syllabus revision for NEET aspirants.</li>
+       <li>✅ Boost your NEET score with our personalized mentorship and proven track record of top selections.</li>
+     </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="demo">
   <h2>Watch Demo Sessions</h2>
   <div class="info-box" style="
@@ -625,6 +743,19 @@ function handleContactForm(event) {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
+    });
+  });
+	document.querySelectorAll('#courses .tab-item').forEach(tab => {
+    tab.addEventListener('click', () => {
+      // deactivate all tabs
+      document.querySelectorAll('#courses .tab-item').forEach(t => t.classList.remove('active'));
+      // hide all panels
+      document.querySelectorAll('#courses .content-panel').forEach(p => p.classList.remove('active'));
+
+      // activate clicked tab
+      tab.classList.add('active');
+      // show its panel
+      document.getElementById(tab.dataset.target).classList.add('active');
     });
   });
 </script>
