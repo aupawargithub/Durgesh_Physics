@@ -71,6 +71,41 @@
       text-decoration: none;
       font-weight: bold;
     }
+/* Compact Header Styling */
+.compact-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, #283593, #64b5f6);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.compact-header.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.compact-header .logo {
+ width: 40px;
+      height: 40px;
+      border-radius: 8px;
+margin-right: 13px;
+  width: auto; /* maintain aspect ratio */
+  object-fit: contain; /* prevent clipping */
+}
+
+.compact-title {
+  font-size: 18px;
+  font-weight: bold;
+}
 
     @media (max-width: 768px) {
       header {
@@ -220,6 +255,7 @@
       max-width: 1000px;
       margin: auto;
       padding: 30px 20px;
+scroll-margin-top: 60px; /* or whatever height your compact header is */
     }
 
     h2 {
@@ -456,7 +492,10 @@ flex-direction: column;
     </div>
     <a href="tel:+917499668944" class="call-now">📞 Call Now</a>
   </header>
-
+<div id="compact-header" class="compact-header">
+  <img src="durgesh_logo.png" alt="Logo" class="logo">
+  <span class="compact-title">DURGESH PHYSICS CLASSES</span>
+</div>
   <nav>
      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
       <div></div>
@@ -768,6 +807,19 @@ function handleContactForm(event) {
       document.getElementById(tab.dataset.target).classList.add('active');
     });
   });
+	const fullHeader = document.getElementById("full-header");
+const compactHeader = document.getElementById("compact-header");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    compactHeader.classList.add("visible");
+    fullHeader.style.display = "none";
+  } else {
+    compactHeader.classList.remove("visible");
+    fullHeader.style.display = "flex"; // use flex because original header uses flex layout
+  }
+});
+
 </script>
 
 </body>
