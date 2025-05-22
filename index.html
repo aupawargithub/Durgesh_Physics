@@ -218,20 +218,23 @@ margin-right: 13px;
     display: block;
   }
 
-  .nav-links {
-    display: none; /* hidden by default */
+    .nav-links {
+
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    background-color: #f1f5f9; /* optional */
-    position: absolute;
-    top: 60px; /* adjust according to your header */
-    left: 0;
+    background-color: #f1f5f9;
+    padding-top: 12px;
+    transform: translateX(100%); /* ✅ initially off-screen to the right */
+    transition: transform 0.3s ease-in-out;
     z-index: 999;
   }
-
   .nav-links.active {
-    display: flex;
+    transform: translateX(0); /* ✅ slide in */
   }
 }
 
@@ -497,6 +500,11 @@ flex-direction: column;
 <div id="compact-header" class="compact-header">
   <img src="durgesh_logo.png" alt="Logo" class="logo">
   <span class="compact-title">DURGESH PHYSICS CLASSES</span>
+	<div class="menu-toggle" id="menuToggleCompact" onclick="toggleMenu('compact')">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
 </div>
   <nav>
      <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
@@ -792,16 +800,60 @@ flex-direction: column;
   }
 
   // Toggle menu for mobile nav
-  function toggleMenu() {
-    const navLinks = document.getElementById("navLinks");
-    const menuToggle = document.getElementById("menuToggle");
+ function toggleMenu(source = 'main') {
+  const navLinks = document.getElementById("navLinks");
+  const toggleMain = document.getElementById("menuToggle");
+  const toggleCompact = document.getElementById("menuToggleCompact");
 
-    navLinks.classList.toggle("active");
-    navLinks.classList.toggle("mobile-hidden");
+  const clickedToggle = source === 'compact' ? toggleCompact : toggleMain;
+  const otherToggle = source === 'compact' ? toggleMain : toggleCompact;
 
-    // Toggle cross/hamburger icon
-    menuToggle.classList.toggle("open");
+  // Reset the other toggle
+  otherToggle.classList.remove("open");
+
+  // Toggle clicked one
+  const isOpening = !clickedToggle.classList.contains("open");
+  clickedToggle.classList.toggle("open", isOpening);
+
+  // Show/hide nav
+  navLinks.classList.toggle("active", isOpening);
+  navLinks.classList.toggle("mobile-hidden", !isOpening);
+
+  // Position nav below toggle
+  if (isOpening) {
+    const rect = clickedToggle.getBoundingClientRect();
+
+    if (source === 'compact') {
+      // Fixed position for compact header (does not scroll)
+      navLinks.style.position = 'fixed';
+      navLinks.style.top = `${rect.bottom}px`;
+    } else {
+      // Absolute position for main header (scrolls with page)
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = `${clickedToggle.offsetTop + clickedToggle.offsetHeight}px`;
+    }
+  } else {
+    // Reset
+    navLinks.style.top = '';
   }
+}
+// Close nav menu when a link is clicked
+document.querySelectorAll('#navLinks a').forEach(link => {
+  link.addEventListener('click', () => {
+    const navLinks = document.getElementById("navLinks");
+    const toggleMain = document.getElementById("menuToggle");
+    const toggleCompact = document.getElementById("menuToggleCompact");
+
+    navLinks.classList.remove("active");
+    navLinks.classList.add("mobile-hidden");
+    navLinks.style.top = '';
+    navLinks.style.position = '';
+
+    toggleMain?.classList.remove("open");
+    toggleCompact?.classList.remove("open");
+  });
+});
+
 function handleContactForm(event) {
     event.preventDefault();
 
