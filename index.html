@@ -227,10 +227,21 @@ margin-right: 13px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f1f5f9;
+    background-color: #e3f2fd;
     padding-top: 12px;
     z-index: 999;
+	      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+border-radius: 0 0 12px 12px;
+
   }
+	nav a {
+  color: #283593;
+  text-decoration: none;
+  margin: 9px 20px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
   .nav-links.active {
     display: flex;
   }
@@ -481,6 +492,13 @@ flex-direction: column;
         height: 50px;
       }
     }
+	  /* Prevent scroll chaining from nav to body */
+#navLinks.prevent-scroll {
+  touch-action: none;
+  overscroll-behavior: contain;
+  overflow-y: auto; /* allow scrolling inside nav if content overflows */
+  max-height: 80vh;  /* optional: limit height */
+}
   </style>
 </head>
 <body>
@@ -798,7 +816,7 @@ flex-direction: column;
   }
 
   // Toggle menu for mobile nav
- function toggleMenu(source = 'main') {
+function toggleMenu(source = 'main') {
   const navLinks = document.getElementById("navLinks");
   const toggleMain = document.getElementById("menuToggle");
   const toggleCompact = document.getElementById("menuToggleCompact");
@@ -822,19 +840,21 @@ flex-direction: column;
     const rect = clickedToggle.getBoundingClientRect();
 
     if (source === 'compact') {
-      // Fixed position for compact header (does not scroll)
       navLinks.style.position = 'fixed';
       navLinks.style.top = `${rect.bottom}px`;
+
+      // ✅ Prevent body scroll while interacting with compact nav
+      navLinks.classList.add("prevent-scroll");
     } else {
-      // Absolute position for main header (scrolls with page)
       navLinks.style.position = 'absolute';
       navLinks.style.top = `${clickedToggle.offsetTop + clickedToggle.offsetHeight}px`;
     }
   } else {
-    // Reset
     navLinks.style.top = '';
+    navLinks.classList.remove("prevent-scroll"); // ✅ Re-enable scroll
   }
 }
+
 // Close nav menu when a link is clicked
 document.querySelectorAll('#navLinks a').forEach(link => {
   link.addEventListener('click', () => {
@@ -842,7 +862,7 @@ document.querySelectorAll('#navLinks a').forEach(link => {
     const toggleMain = document.getElementById("menuToggle");
     const toggleCompact = document.getElementById("menuToggleCompact");
 
-    navLinks.classList.remove("active");
+    navLinks.classList.remove("active", "prevent-scroll"); // ✅ Remove scroll lock
     navLinks.classList.add("mobile-hidden");
     navLinks.style.top = '';
     navLinks.style.position = '';
