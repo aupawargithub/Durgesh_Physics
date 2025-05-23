@@ -30,7 +30,7 @@
     header {
       background: linear-gradient(to right, #283593, #64b5f6);
       color: white;
-      padding: 20px 40px;
+      padding: 15px 35px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -44,33 +44,24 @@
     }
 
     .logo {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       border-radius: 8px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .header-title {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: bold;
       margin-bottom: 4px;
     }
 
     .header-subtitle {
-      font-size: 14px;
+      font-size: 12px;
       color: #e0f7fa;
     }
 
-
-    .call-now {
-      background: #ffca28;
-      color: #000;
-      padding: 10px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
 /* Compact Header Styling */
 .compact-header {
   position: fixed;
@@ -107,39 +98,6 @@ margin-right: 13px;
   font-weight: bold;
 }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .header-left {
-        flex-direction: column;
-        margin-bottom: 15px;
-      }
-
-      .logo {
-        margin-right: 0;
-      }
-    }
-
-
-    .call-now {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #ffca28;
-      color: #000;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .call-now:hover {
-      background: #ffd54f;
-    }
 
     nav {
       background-color: #ffffff;
@@ -511,7 +469,6 @@ flex-direction: column;
         <div class="header-subtitle">Foundation for 9th–12th | NEET | JEE | MHT-CET</div>
       </div>
     </div>
-    <a href="tel:+917499668944" class="call-now">📞 Call Now</a>
   </header>
 <div id="compact-header" class="compact-header">
   <img src="durgesh_logo.png" alt="Logo" class="logo">
