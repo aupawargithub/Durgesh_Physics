@@ -184,7 +184,7 @@ transform: translateY(-50%);  /* Adjust from center */
 }
     /* === Navigation Base === */
 .nav-links {
-  display: flex;
+  
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -212,19 +212,32 @@ position: absolute; /* ✅ Position under header */
     z-index: 999;
 	      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 border-radius: 0 0 12px 12px;
+	    transform: scaleY(0); /* Hide initially */
+transform-origin: top;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s;
 
   }
 	nav a {
   color: #283593;
   text-decoration: none;
-  margin: 9px 20px;
+margin: 9px 0;          
+  padding: 8px 20px; 
   font-weight: 600;
   transition: color 0.3s;
 border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
+ width: 100%;                /* make link take full width */
+  max-width: 300px;           /* optional: max width to avoid super wide */
+  box-sizing: border-box;     /* include padding in width */
+  text-align: center;         /* center text inside link */
+
 }
 
   .nav-links.active {
-    display: flex;
+      transform: scaleY(1);  /* Show on active */
+  opacity: 1;
+  visibility: visible;
   }
 }
 
@@ -454,18 +467,18 @@ justify-content: center;
       }
 
       .menu-toggle {
-        display: flex;
+        
       }
 
       .nav-links {
-        display: none;
+        
 flex-direction: column;
         width: 100%;
         text-align: center;
       }
 
       .nav-links.active {
-        display: flex;
+        
       }
 
       .whatsapp-float img {
