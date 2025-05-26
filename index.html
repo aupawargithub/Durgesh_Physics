@@ -30,37 +30,53 @@
     header {
       background: linear-gradient(to right, #283593, #64b5f6);
       color: white;
-      padding: 15px 35px;
+      padding: 15px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+position: relative; /* ✅ Makes nav-links position relative to header */
+flex-wrap: nowrap;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
+	min-width: 0;
+  flex-shrink: 1;
     }
 
     .logo {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       border-radius: 8px;
       object-fit: cover;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+	    flex-shrink: 0;
     }
+	  .header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
 
     .header-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: bold;
-      margin-bottom: 2px;
+	     white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+      
     }
 
     .header-subtitle {
       font-size: 12px;
       color: #e0f7fa;
-	    margin-left: 9px;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;   
     }
 
 /* Compact Header Styling */
@@ -123,7 +139,8 @@ margin-right: 13px;
 
 .menu-toggle {
   position: absolute;
-  top: 14px;
+  top: 50%;  
+transform: translateY(-50%);  /* Adjust from center */
   right: 20px;
   width: 30px;
   height: 30px;
@@ -131,16 +148,16 @@ margin-right: 13px;
   z-index: 1000;
 	outline: none;
   -webkit-tap-highlight-color: transparent;
-	border: 1px solid #283593;   /* 👈 Add this for the border */
-  border-radius: 4px;        /* Optional: small rounded corners */
-  box-sizing: border-box;    /* Ensures padding/border stays within 30x30 */
+	//border: 1px solid white;   /* 👈 Add this for the border */
+ // border-radius: 4px;        /* Optional: small rounded corners */
+ // box-sizing: border-box;    /* Ensures padding/border stays within 30x30 */
 }
 
 .menu-toggle div {
   position: absolute;
   width: 24px;
   height: 3px;
-  background-color: #283593;
+  background-color: white;
   border-radius: 2px;
   transition: all 0.3s ease;
   left: 2px;
@@ -181,8 +198,9 @@ margin-right: 13px;
   }
 
     .nav-links {
+position: absolute; /* ✅ Position under header */
+    top: 100%; /* ✅ Directly below header */
 
-    top: 0;
     right: 0;
     width: 100%;
     height: auto;
@@ -474,6 +492,11 @@ flex-direction: column;
         <div class="header-subtitle">Foundation for 9th–12th | NEET | JEE | MHT-CET</div>
       </div>
     </div>
+	  <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </header>
 <div id="compact-header" class="compact-header">
   <img src="durgesh_logo.png" alt="Logo" class="logo">
@@ -485,11 +508,7 @@ flex-direction: column;
 </div>
 </div>
   <nav>
-     <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+     
   <div class="nav-links mobile-hidden" id="navLinks">
       <a href="#about">About Us</a>
       <a href="#courses">Our Courses</a>
@@ -777,7 +796,7 @@ flex-direction: column;
       .catch(err => console.error('Service Worker failed', err));
   }
 
-  // Toggle menu for mobile nav
+   // Toggle menu for mobile nav
 function toggleMenu(source = 'main') {
   const navLinks = document.getElementById("navLinks");
   const toggleMain = document.getElementById("menuToggle");
@@ -786,34 +805,27 @@ function toggleMenu(source = 'main') {
   const clickedToggle = source === 'compact' ? toggleCompact : toggleMain;
   const otherToggle = source === 'compact' ? toggleMain : toggleCompact;
 
-  // Reset the other toggle
-  otherToggle.classList.remove("open");
+  otherToggle?.classList.remove("open");
 
-  // Toggle clicked one
   const isOpening = !clickedToggle.classList.contains("open");
   clickedToggle.classList.toggle("open", isOpening);
 
-  // Show/hide nav
   navLinks.classList.toggle("active", isOpening);
   navLinks.classList.toggle("mobile-hidden", !isOpening);
 
-  // Position nav below toggle
   if (isOpening) {
-    const rect = clickedToggle.getBoundingClientRect();
-
     if (source === 'compact') {
+      const rect = clickedToggle.getBoundingClientRect();
       navLinks.style.position = 'fixed';
       navLinks.style.top = `${rect.bottom}px`;
-
-      // ✅ Prevent body scroll while interacting with compact nav
       navLinks.classList.add("prevent-scroll");
     } else {
-      navLinks.style.position = 'absolute';
-      navLinks.style.top = `${clickedToggle.offsetTop + clickedToggle.offsetHeight}px`;
+      navLinks.style.position = ''; // reset to CSS (absolute with top: 100%)
+      navLinks.style.top = '';
     }
   } else {
     navLinks.style.top = '';
-    navLinks.classList.remove("prevent-scroll"); // ✅ Re-enable scroll
+    navLinks.classList.remove("prevent-scroll");
   }
 }
 
