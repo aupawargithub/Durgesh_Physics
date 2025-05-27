@@ -262,12 +262,16 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
       padding: 30px 20px;
 scroll-margin-top: 60px; /* or whatever height your compact header is */
     }
+	  section > *:not(:last-child) {
+  margin-bottom: 18px; /* uniform spacing between child elements */
+}
+
 
     h2 {
       font-size: 28px;
       color: #1a237e;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 8px;
     }
 h2 i {
       color: #007bff;
@@ -278,7 +282,7 @@ h2 i {
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       padding: 28px;
-      margin-bottom: 40px;
+      
     }
 
     ul {
@@ -291,7 +295,7 @@ h2 i {
 #courses {
   padding: 40px 20px;
   background: #f1f5f9;
- margin-bottom: 40px;
+ 
 }
 #courses h2 {
   text-align: center;
