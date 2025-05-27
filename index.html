@@ -837,7 +837,16 @@ function toggleMenu(source = 'main') {
       navLinks.style.top = '';
     }
   } else {
-    navLinks.style.top = '';
+    
+    navLinks.classList.remove("prevent-scroll");
+	  // Wait for the transition (400ms) before hiding completely
+    setTimeout(() => {
+      navLinks.classList.add("mobile-hidden");
+      navLinks.style.top = '';
+      navLinks.style.position = '';
+    }, 400); // Match CSS transition time
+
+    clickedToggle.classList.remove("open");
     navLinks.classList.remove("prevent-scroll");
   }
 }
