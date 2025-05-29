@@ -157,8 +157,18 @@ margin-right: 13px;
     background-position: center;
   }
 
+/* Desktop: fixed height, keep width auto */
+@media (min-width: 769px) {
+  .swiper {
+    aspect-ratio: unset;
+    height: 500px;  /* Example fixed height, adjust as needed */
+    width: auto;
+    max-width: 100%;
+  }
+}
   @media (max-width: 768px) {
     .swiper {
+     aspect-ratio: 16 / 9;
       height: auto;
     }
   }
