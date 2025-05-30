@@ -349,6 +349,78 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
     flex-shrink: 0;
   }
 }
+/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+@media (max-width: 360px) {
+  header,
+  .compact-header {
+    padding-right: 60px;
+    flex-wrap: nowrap;
+  }
+
+  .header-left {
+    gap: 8px;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-text {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-title,
+  .header-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+.compact-title {
+font-size: 15px;
+}
+
+  .logo {
+    flex-shrink: 0;
+  }
+}
+/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+@media (max-width: 375px) {
+  header,
+  .compact-header {
+    padding-right: 60px;
+    flex-wrap: nowrap;
+  }
+
+  .header-left {
+    gap: 8px;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-text {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-title,
+  .header-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+.compact-title {
+font-size: 15px;
+}
+
+  .logo {
+    flex-shrink: 0;
+  }
+}
 
 @media (max-width: 400px) {
   .header-title {
