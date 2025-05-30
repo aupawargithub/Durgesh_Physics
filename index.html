@@ -44,6 +44,7 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 position: relative; /* ✅ Makes nav-links position relative to header */
 flex-wrap: nowrap;
+	    padding-right: 60px; /* ✅ Reserve space for toggle */
     }
 
     .header-left {
@@ -52,6 +53,7 @@ flex-wrap: nowrap;
       gap: 10px;
 	min-width: 0;
   flex-shrink: 1;
+	    overflow: hidden;	
     }
 
     .logo {
@@ -67,6 +69,7 @@ flex-wrap: nowrap;
   flex-direction: column;
   min-width: 0;
   overflow: hidden;
+ flex-grow: 1;
 }
 
     .header-title {
@@ -98,6 +101,7 @@ flex-wrap: nowrap;
   align-items: center;
   padding: 10px 20px;
   opacity: 0;
+	padding-right: 60px; /* ✅ Reserve space for toggle here too */
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 1000;
@@ -121,6 +125,9 @@ margin-right: 13px;
 .compact-title {
   font-size: 18px;
   font-weight: bold;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -177,7 +184,7 @@ margin-right: 13px;
   position: absolute;
   top: 50%;  
 transform: translateY(-50%);  /* Adjust from center */
-  right: 20px;
+  right: 15px;
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -307,6 +314,49 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
   }
 	 .call-now {
     display: flex;
+  }
+}
+/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+@media (max-width: 768px) {
+  header,
+  .compact-header {
+    padding-right: 60px;
+    flex-wrap: nowrap;
+  }
+
+  .header-left {
+    gap: 8px;
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-text {
+    flex-grow: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .header-title,
+  .header-subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+
+  .logo {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-title {
+    font-size: 16px;
+  }
+
+  .header-subtitle {
+    font-size: 12px;
   }
 }
 
@@ -559,8 +609,8 @@ flex-direction: column;
 
   <header>
     <div class="header-left">
-      <img src="durgesh_logo.png" alt="Logo" class="logo">
-      <div>
+      <img class="logo" src="durgesh_logo.png" alt="Logo" />
+     <div class="header-text">
         <div class="header-title">DURGESH PHYSICS CLASSES</div>
         <div class="header-subtitle">Foundation for 9th–12th | NEET | JEE | MHT-CET</div>
       </div>
