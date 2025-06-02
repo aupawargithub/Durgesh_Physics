@@ -45,6 +45,7 @@
 position: relative; /* ✅ Makes nav-links position relative to header */
 flex-wrap: nowrap;
 	    padding-right: 60px; /* ✅ Reserve space for toggle */
+	    z-index: 1000;
     }
 
     .header-left {
@@ -152,6 +153,13 @@ margin-right: 13px;
     nav a:hover {
       color: #F2BAB3;
     }
+@media (min-width: 769px) {
+  nav {
+    position: relative;
+    z-index: 1000; /* Only apply z-index on desktop */
+  }
+}
+	  
 .swiper {
     width: auto;
     aspect-ratio: 16/9;
