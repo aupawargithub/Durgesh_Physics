@@ -188,6 +188,26 @@ margin-right: 13px;
       height: auto;
     }
   }
+/* Position pagination dots below the swiper */
+.swiper-pagination {
+  text-align: center;
+  margin-top: 12px;
+  position: relative; /* Important to keep it below, not on top */
+}
+
+/* Style the dots */
+.swiper-pagination-bullet {
+  background-color: grey;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #333; /* darker when active */
+}
+
 	  
 .menu-toggle {
   position: absolute;
@@ -737,7 +757,8 @@ flex-direction: column;
     <div class="swiper-slide" style="background-image: url('durgesh_02.png')"></div>
   </div>
 </div>
-
+<!-- Pagination goes here -->
+<div class="swiper-pagination"></div>
 
   <section id="about">
     <h2><i class="fa-solid fa-atom"></i>About Us</h2>
@@ -1102,15 +1123,19 @@ window.addEventListener("scroll", () => {
     fullHeader.style.display = "flex"; // use flex because original header uses flex layout
   }
 });
- const swiper = new Swiper(".myHeroSwiper", {
-    loop: true,
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    speed: 800,
-    effect: 'slide',
-  });
+const swiper = new Swiper(".myHeroSwiper", {
+  loop: true,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false,
+  },
+  speed: 800,
+  effect: 'slide',
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+});
 </script>
 
 </body>
