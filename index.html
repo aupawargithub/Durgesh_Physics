@@ -150,8 +150,24 @@ margin-right: 13px;
       transition: color 0.3s;
     }
 
+      nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-orange);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
     nav a:hover {
-      color: #FFA500;
+      color: #ffd700;
+      transform: translateY(-1px);
     }
 @media (min-width: 769px) {
   nav {
@@ -557,6 +573,17 @@ justify-content: center;
 .tab-item:hover:not(.active) {
   background: #d5d5d5;
 	transform: translateY(-1px);
+}
+	  .tab-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 3px; /* Adjust to 10px for thick or 2–3px for thin line */
+  background: linear-gradient(to right, #007bff, #ffa000);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
 }
 .tab-content {
    background: #E4ECFC;
