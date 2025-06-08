@@ -586,6 +586,30 @@ justify-content: center;
       flex-direction: column;
       gap: 16px;
     }
+/* Thin top gradient line */
+.info-box::before,
+.testimonial::before,
+form::before,
+.tabs::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 3px; /* thinner than 10px */
+  background: linear-gradient(to right, #007bff, #ffa000);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+/* Anchor the line correctly */
+.info-box,
+.testimonial,
+form,
+.tabs {
+  position: relative;
+  overflow: hidden;
+}
 
     input, textarea {
       padding: 14px;
