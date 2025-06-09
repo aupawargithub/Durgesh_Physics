@@ -704,11 +704,14 @@ form,
       font-weight: bold;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+	    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-md);
     }
 
     button:hover {
       background: #1565c0;
+	     transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
 
     iframe {
@@ -717,6 +720,7 @@ form,
       border: none;
       border-radius: 12px;
       margin-top: 15px;
+	    box-shadow: var(--shadow-lg);
     }
 .scroll-to-top {
   position: fixed;
@@ -731,17 +735,18 @@ form,
   text-align: center;
   border-radius: 50%;
   text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-lg);
   display: none; /* Hidden initially */
   z-index: 1000;
-  transition: all 0.3s ease;
+   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .scroll-to-top:hover {
   background-color: #000;
-  transform: scale(1.1);
+    transform: translateY(-4px) scale(1.05);
+      box-shadow: var(--shadow-xl);
 }
 
 
@@ -756,12 +761,13 @@ form,
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .whatsapp-float img:hover {
-      transform: scale(1.1);
+        transform: translateY(-4px) scale(1.1);
+      box-shadow: var(--shadow-xl);
     }
 
     footer {
