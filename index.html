@@ -735,18 +735,18 @@ form,
   text-align: center;
   border-radius: 50%;
   text-decoration: none;
-  box-shadow: var(--shadow-lg);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   display: none; /* Hidden initially */
   z-index: 1000;
-   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 	outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .scroll-to-top:hover {
   background-color: #000;
-    transform: translateY(-4px) scale(1.05);
-      box-shadow: var(--shadow-xl);
+      transform: scale(1.1);
+      
 }
 
 
@@ -761,13 +761,12 @@ form,
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      box-shadow: var(--shadow-lg);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
     }
 
     .whatsapp-float img:hover {
-        transform: translateY(-4px) scale(1.1);
-      box-shadow: var(--shadow-xl);
+         transform: scale(1.1);
     }
 
     footer {
