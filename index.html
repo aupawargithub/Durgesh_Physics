@@ -338,10 +338,13 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
       border-radius: 8px;
       font-weight: bold;
       text-decoration: none;
-      transition: background 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-md);
     }
 
     .call-now:hover {
+	    transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
       background: #ffd54f;
     }
 
@@ -502,9 +505,15 @@ h2 i {
     .info-box, .testimonial, form {
       background: #ffffff;
       border-radius: 14px;
+	    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--neutral-200);
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       padding: 28px;
       
+    }
+	   .info-box:hover, .testimonial:hover, form:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
     }
 
     ul {
@@ -529,6 +538,7 @@ h2 i {
 #courses {
   padding: 40px 20px;
   background: #f1f5f9;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
  
 }
 #courses h2 {
@@ -542,7 +552,13 @@ background: #ffffff;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
   padding: 20px;
   margin: auto;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.tabs:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+	  
 .tab-list {
   display: flex;
 justify-content: center;
@@ -560,7 +576,7 @@ justify-content: center;
   color: #555;
   border-radius: 30px;
   background: #e0e0e0;
-  transition: background 0.3s;
+   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	 outline: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -574,6 +590,12 @@ justify-content: center;
   background: #d5d5d5;
 	transform: translateY(-1px);
 }
+.tab-item:hover:not(.active) {
+  background: #d5d5d5;
+	transform: translateY(-1px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+	  
 	  .tab-content::before {
   content: "";
   position: absolute;
@@ -592,8 +614,14 @@ justify-content: center;
       box-shadow: 0 6px 20px rgba(0,0,0,0.08);
  padding: 20px;
 	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
 }
+.tab-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+	  
 .content-panel {
   display: none;
 }
@@ -615,6 +643,7 @@ justify-content: center;
   margin-bottom: 20px;
  text-align: center;
   color: #1565c0;
+	transition: all 0.3s ease;
 }
 
     .testimonial {
