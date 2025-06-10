@@ -169,6 +169,37 @@ margin-right: 13px;
       color: #ffd700;
       transform: translateY(-1px);
     }
+/* Default nav-wrapper (mobile and default) */
+#nav-wrapper {
+  position: relative;
+  z-index: 999;
+}
+
+/* Sticky nav under compact header only on desktop */
+@media (min-width: 769px) {
+  .compact-header.visible + #nav-wrapper nav {
+    position: fixed;
+    top: 60px; /* Adjust based on your .compact-header height */
+    left: 0;
+    right: 0;
+    z-index: 998;
+    background: linear-gradient(to right, #283593, #64b5f6); /* Match header */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Prevent content jump due to fixed nav */
+  .compact-header.visible + #nav-wrapper::after {
+    content: "";
+    display: block;
+    height: 45px; /* Equal to nav height */
+  }
+}
+
+#nav-wrapper {
+  position: relative;
+  z-index: 1000; /* between compact-header and full-header */
+}
+	  
 @media (min-width: 769px) {
   nav {
     position: relative;
@@ -858,6 +889,7 @@ flex-direction: column;
   <div></div>
 </div>
 </div>
+	<div id="nav-wrapper">
   <nav>
      
   <div class="nav-links mobile-hidden" id="navLinks">
@@ -871,6 +903,7 @@ flex-direction: column;
  <a href="https://www.youtube.com/@durgeshpawarphysics" target="_blank">Watch Demo Sessions</a>
     </div>
   </nav>
+</div>		
 <!-- Place this in the <head> or before your section -->
 
 <!-- Swiper -->
