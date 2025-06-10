@@ -169,11 +169,7 @@ margin-right: 13px;
       color: #ffd700;
       transform: translateY(-1px);
     }
-/* Default nav-wrapper (mobile and default) */
-#nav-wrapper {
-  position: relative;
-  z-index: 999;
-}
+
 
 /* Sticky nav under compact header only on desktop */
 @media (min-width: 769px) {
@@ -193,11 +189,16 @@ margin-right: 13px;
     display: block;
     height: 45px; /* Equal to nav height */
   }
-}
+ #nav-wrapper {
+    position: relative;
+    z-index: 1000; /* between compact-header and full-header */
+  }
 
-#nav-wrapper {
-  position: relative;
-  z-index: 1000; /* between compact-header and full-header */
+  nav {
+    position: relative;
+    z-index: 1000;
+  }
+	
 }
 	  
 @media (min-width: 769px) {
