@@ -610,25 +610,25 @@ justify-content: center;
   font-weight: 600;
   color: #555;
   border-radius: 30px;
-  background: #e0e0e0;
+ background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow: 0 4px 8px rgba(0,0,0,0.05);
    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	 outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 .tab-item.active {
-  background: #E4ECFC;
-  color: #1e88e5;
+  background: linear-gradient(135deg, #4286f4, #2dc5ff);
+  color: #fff;
 	transform: translateY(-2px);
+	box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
   border-bottom: 2px solid white;
 }
+
 .tab-item:hover:not(.active) {
-  background: #d5d5d5;
+ background: linear-gradient(135deg, #d6e4ff, #f2f9ff);
 	transform: translateY(-1px);
-}
-.tab-item:hover:not(.active) {
-  background: #d5d5d5;
-	transform: translateY(-1px);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+ box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+	 color: #1e88e5;
 }
 	  
 	  .tab-content::before {
