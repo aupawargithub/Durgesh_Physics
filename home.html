@@ -30,11 +30,18 @@
       background: #d32f2f;
       color: white;
       padding: 12px 24px;
-      font-size: 20px;
+      font-size: 22px;
       border: none;
-      border-radius: 5px;
+      border-radius: 999px;
       cursor: pointer;
+      box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    #logoutBtn:hover {
+  background-color: #b71c1c;
+ transform: translateY(-2px);
+   box-shadow: var(--shadow-lg);
+}
     
     #welcome {
       font-size: 18px;
@@ -75,6 +82,10 @@
         <li>Anjali Verma</li>
         <li>Sachin Kamat</li>
         <li>Kavita Jha</li>
+        <li>Sanjay Magar</li>
+        <li>Ramnath Gadhe</li>
+        <li>Neeta Ubhe</li>
+        <li>Pratima Sahane</li>
         <!-- Add more students -->
       </ul>
     </div>
@@ -90,9 +101,13 @@
     <div class="card">
       <h2>Class Schedule</h2>
       <ul>
-        <li>Monday - Physics-Board: 10 AM - 12 PM</li>
-        <li>Wednesday - JEE, NEET: 2 PM - 4 PM</li>
-        <li>Friday - Physics-CET: 11 AM - 1 PM</li>
+        <li>Mon - ssc-board: 10 AM - 12 PM</li>
+        <li>Tue - hsc-board: 10 AM - 12 PM</li>
+        <li>Wed - jee, neet: 2 PM - 4 PM</li>
+        <li>Thu - jee, neet: 10 AM - 12 PM</li>
+        <li>Fri - ssc & hsc: 11 AM - 1 PM</li>
+        <li>Mon - jee, neer: 10 AM - 12 PM</li>
+        <li>Sun - test: 10 AM - 12 PM</li>
       </ul>
     </div>
 
@@ -101,6 +116,7 @@
       <h2>Important Notices</h2>
       <ul>
         <li>📢 Next mock test on 15th July</li>
+         <li>📢 Q/A session on 21th July</li>
         <li>📢 Fees deadline: 20th July</li>
         <li>📢 Practical sessions start next week</li>
       </ul>
