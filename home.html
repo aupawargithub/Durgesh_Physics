@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
+      padding: 30px;
+    }
+    #logoutBtn {
+      padding: 10px 20px;
+      background: #d32f2f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+    #welcome {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to the Home Page!</h1>
+  <p id="welcome"></p>
+  <button id="logoutBtn">Logout</button>
+
+  <script>
+  // Check login status
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+  const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
+
+  if (!isLoggedIn) {
+    window.location.href = "index.html";
+  } else {
+    document.getElementById("welcome").innerText = `Logged in as: ${userEmail}`;
+  }
+
+  // Logout
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    sessionStorage.removeItem("loggedIn");
+    sessionStorage.removeItem("userEmail");
+    window.location.href = "index.html"; // Or use location.replace("index.html");
+  });
+</script>
+
+</body>
+</html>
