@@ -212,6 +212,7 @@ margin-right: 13px;
 }
 	  
 .swiper {
+	 position: relative; /* ✅ Add this */
     width: auto;
     aspect-ratio: 16/9;
      // border-top: 1px solid #616161; /* light gray separator line */
@@ -867,6 +868,123 @@ flex-direction: column;
   overflow-y: auto; /* allow scrolling inside nav if content overflows */
   max-height: 80vh;  /* optional: limit height */
 }
+ #loginBtn {
+        position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10000; /* 👁️ Ensures it stays above swiper */
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+    }
+    
+.login-btn:hover {
+  background-color: #0056b3;
+}
+@media (max-width: 768px) {
+#loginBtn {
+    top: 10px;
+    right: 10px;
+    padding: 6px 13px;
+    font-size: 14px;
+  }
+}
+    #loginModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 300px;
+      position: relative;
+      z-index: 10000;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-box label {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-box button:hover {
+      background: #0056b3;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #777;
+}
+	  
   </style>
 </head>
 <body>
@@ -907,6 +1025,7 @@ flex-direction: column;
       <a href="#contact">Contact Us</a>
 	  <a href="#discussion">Discussion Forum</a>
  <a href="https://www.youtube.com/@durgeshpawarphysics" target="_blank">Watch Demo Sessions</a>
+	  <a href="#" id="fixedLoginBtn">Login</a>
     </div>
   </nav>
 </div>		
@@ -914,6 +1033,7 @@ flex-direction: column;
 
 <!-- Swiper -->
 <div class="swiper myHeroSwiper">
+	<button id="loginBtn">Login</button>
   <div class="swiper-wrapper">
     <!-- Slide 1 -->
     <div class="swiper-slide" style="background-image: url('durgesh_Image.png')"></div>
@@ -924,6 +1044,26 @@ flex-direction: column;
 </div>
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
+	
+	<div id="loginModal">
+  <div class="login-box">
+    <span class="close-btn" onclick="closeLogin()">×</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Password" required>
+        <span id="togglePassword" class="eye-icon">👁️</span>
+      </div>
+      <label>
+        <input type="checkbox" id="rememberMe"> Remember Me
+      </label>
+      <button type="submit">Login</button>
+    </form>
+    <div class="message" id="messageBox"></div>
+  </div>
+</div>
+
 
   <section id="about">
     <h2><i class="fa-solid fa-atom"></i>About Us</h2>
@@ -1344,6 +1484,88 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
+ // DOM references
+  const loginBtn = document.getElementById("loginBtn");
+  const fixedLoginBtn = document.getElementById("fixedLoginBtn");
+  const loginModal = document.getElementById("loginModal");
+  const messageBox = document.getElementById("messageBox");
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+
+  // Predefined users
+  const users = [
+    { email: "user1@example.com", password: "pass1" },
+    { email: "admin@example.com", password: "admin123" },
+    { email: "akash@example.com", password: "secret456" }
+  ];
+
+  // Check if already logged in
+  const isLoggedIn =
+    localStorage.getItem("loggedIn") === "true" ||
+    sessionStorage.getItem("loggedIn") === "true";
+
+  if (isLoggedIn) {
+    window.location.href = "home.html";
+  }
+
+  // Open login modal (shared function)
+  function openLogin() {
+    loginModal.style.display = "flex";
+    messageBox.textContent = "";
+  }
+
+  // Close login modal
+  function closeLogin() {
+    loginModal.style.display = "none";
+    messageBox.textContent = "";
+  }
+
+  // Toggle password visibility
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.getAttribute("type") === "password";
+    passwordInput.setAttribute("type", isPassword ? "text" : "password");
+    togglePassword.textContent = isPassword ? "🙈" : "👁️";
+  });
+
+  // Assign open modal to both buttons
+  loginBtn.onclick = openLogin;
+  fixedLoginBtn.onclick = openLogin;
+
+  // Login form submission
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const remember = document.getElementById("rememberMe").checked;
+
+    const user = users.find(
+      user => user.email === email && user.password === password
+    );
+
+    if (user) {
+      // Store login state
+      if (remember) {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userEmail", email);
+      } else {
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("userEmail", email);
+      }
+
+      messageBox.style.color = "green";
+      messageBox.textContent = "Login successful! Redirecting...";
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000);
+    } else {
+      messageBox.style.color = "red";
+      messageBox.textContent = "Invalid email or password.";
+    }
+  });
+
+  // Close modal when clicking outside the box
+	
 </script>
 
 </body>
