@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard - Durgesh Physics Classes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #283593;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #d32f2f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+     border-radius: 999px;
+      cursor: pointer;
+      font-size: 22px;
+      box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logout-btn:hover {
+      background-color: #b71c1c;
+ transform: translateY(-2px);
+   box-shadow: var(--shadow-lg);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Durgesh Physics Classes</h1>
+    <p>Student Dashboard</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="container">
+    <h2>Personal Details</h2>
+    <p><strong>Name:</strong>Abhishek Jadhav</p>
+    <p><strong>Roll No:</strong> DPC134</p>
+    <p><strong>Email:</strong> abhijadhav555@gmail.com</p>
+    <p><strong>Batch:</strong> NEET 2025</p>
+
+    <h2>Month-wise Marks</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Test Name</th>
+          <th>Marks Obtained</th>
+          <th>Total Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>January</td>
+          <td>Chapter Test: Motion</td>
+          <td>42</td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td>February</td>
+          <td>Unit Test: Laws of Motion</td>
+          <td>38</td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td>March</td>
+          <td>Half-Yearly</td>
+          <td>75</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Month-wise Attendance</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Total Classes</th>
+          <th>Attended</th>
+          <th>Attendance %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>January</td>
+          <td>20</td>
+          <td>18</td>
+          <td>90%</td>
+        </tr>
+        <tr>
+          <td>February</td>
+          <td>22</td>
+          <td>20</td>
+          <td>91%</td>
+        </tr>
+        <tr>
+          <td>March</td>
+          <td>25</td>
+          <td>24</td>
+          <td>96%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      sessionStorage.removeItem("loggedIn");
+      localStorage.removeItem("userEmail");
+      sessionStorage.removeItem("userEmail");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
