@@ -72,6 +72,36 @@
     th {
       background-color: #f0f0f0;
     }
+    .download-box {
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  background-color: #f9f9ff;
+  text-align: center;
+}
+
+.download-box h2 {
+  margin-top: 0;
+  color: #283593;
+}
+
+.download-btn {
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #2e7d32;
+}
+
   </style>
 </head>
 <body>
@@ -153,7 +183,11 @@
       </tbody>
     </table>
   </div>
-
+<div class="download-box">
+  <h2>Download Study Material</h2>
+  <p>Click the button below to download the latest notes and study materials for your batch.</p>
+  <button class="download-btn">Download</button>
+</div>
   <script>
     function logout() {
       localStorage.removeItem("loggedIn");
