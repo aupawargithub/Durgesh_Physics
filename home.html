@@ -2,77 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Durgesh Physics Classes - Admin Dashboard</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
+    :root {
+      --primary: #007bff;
+      --danger: #d32f2f;
+      --danger-dark: #b71c1c;
+      --bg: #f9f9f9;
+      --card-bg: #fff;
+      --text: #333;
     }
-    h1, h2 {
-      color: #333;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .dashboard {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  padding: 0;
+}
+   
+    header {
+      display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+   background: linear-gradient(to right, #283593, #64b5f6);
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: #fff;
     }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
+
+    header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+#welcome, .user-info {
+  font-size: 1rem;
+  color: #f0f8ff;
+}
+
+
     #logoutBtn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #d32f2f;
+      background: var(--danger);
       color: white;
-      padding: 12px 24px;
-      font-size: 22px;
+      padding: 10px 20px;
       border: none;
       border-radius: 999px;
       cursor: pointer;
-      box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease-in-out;
     }
+
     #logoutBtn:hover {
-  background-color: #b71c1c;
- transform: translateY(-2px);
-   box-shadow: var(--shadow-lg);
-}
-    
-    #welcome {
-      font-size: 18px;
-      margin-bottom: 20px;
+      background-color: var(--danger-dark);
+      transform: translateY(-2px);
     }
+
+    /* Main dashboard layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
     ul {
+      list-style-type: disc;
       padding-left: 20px;
     }
+
     input[type="file"] {
-      margin-top: 10px;
+      display: block;
+      margin-top: 12px;
     }
+
     .upload-section button {
-      background: #007BFF;
+      background: var(--primary);
       color: white;
-      padding: 6px 12px;
+      padding: 8px 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       margin-top: 10px;
+      font-size: 0.9rem;
     }
+
     .upload-section button:hover {
       background: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      #logoutBtn {
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
-  <button id="logoutBtn">Logout</button>
-  <h1>Durgesh Physics Classes - Admin Dashboard</h1>
-  <p id="welcome"></p>
-  <p>User: Durgesh Pawar</p>
+  <header>
+    <div>
+      <h1>Durgesh Physics Classes - Admin Dashboard</h1>
+      <p id="welcome"></p>
+      <p class="user-info">User: Durgesh Pawar</p>
+    </div>
+    <button id="logoutBtn">Logout</button>
+  </header>
 
   <div class="dashboard">
     <!-- Student List -->
@@ -91,7 +163,6 @@
         <li>Sagar Jadhav</li>
         <li>Akash Munde</li>
         <li>Pooja Kadam</li>
-        <!-- Add more students -->
       </ul>
     </div>
 
@@ -106,13 +177,13 @@
     <div class="card">
       <h2>Class Schedule</h2>
       <ul>
-        <li>Mon - ssc-board: 10 AM - 12 PM</li>
-        <li>Tue - hsc-board: 10 AM - 12 PM</li>
-        <li>Wed - jee, neet: 2 PM - 4 PM</li>
-        <li>Thu - jee, neet: 10 AM - 12 PM</li>
-        <li>Fri - ssc & hsc: 11 AM - 1 PM</li>
-        <li>Mon - jee, neer: 10 AM - 12 PM</li>
-        <li>Sun - test: 10 AM - 12 PM</li>
+        <li>Mon - SSC Board: 10 AM - 12 PM</li>
+        <li>Tue - HSC Board: 10 AM - 12 PM</li>
+        <li>Wed - JEE/NEET: 2 PM - 4 PM</li>
+        <li>Thu - JEE/NEET: 10 AM - 12 PM</li>
+        <li>Fri - SSC & HSC: 11 AM - 1 PM</li>
+        <li>Sat - JEE/NEET: 10 AM - 12 PM</li>
+        <li>Sun - Test: 10 AM - 12 PM</li>
       </ul>
     </div>
 
@@ -121,9 +192,9 @@
       <h2>Important Notices</h2>
       <ul>
         <li>📢 Next mock test on 15th July</li>
-         <li>📢 Q/A session on 21th July</li>
+        <li>📢 Q/A session on 21st July</li>
         <li>📢 Fees deadline: 20th July</li>
-        <li>📢 New Batch Start: 27th July</li>
+        <li>📢 New Batch Starts: 27th July</li>
         <li>📢 Practical sessions start next week</li>
       </ul>
     </div>
