@@ -913,7 +913,7 @@ font-weight: 200;
     }
 
     .login-box {
-      background: white;
+      background: #f1f5f9;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -965,7 +965,7 @@ font-weight: 200;
       right: 15px;
       font-size: 20px;
       cursor: pointer;
-      color: #999;
+      color: #000000;
     }
 
     .message {
@@ -989,6 +989,9 @@ font-weight: 200;
   cursor: pointer;
   font-size: 18px;
   color: #777;
+}
+	  a#forgotPasswordLink:hover {
+  text-decoration: underline;
 }
 	  
   </style>
@@ -1066,7 +1069,20 @@ font-weight: 200;
       </label>
       <button type="submit">Login</button>
     </form>
+	   <!-- Add inside your existing login-box, below the login button -->
+<a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
+
     <div class="message" id="messageBox"></div>
+  </div>
+		<!-- Forgot Password Box -->
+  <div class="login-box" id="forgotPasswordBox" style="display: none;">
+    <span class="close-btn" onclick="closeForgotPassword()">×</span>
+    <h2>Forgot Password</h2>
+    <form id="forgotPasswordForm">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="message" id="forgotMessageBox"></div>
   </div>
 </div>
 
@@ -1571,6 +1587,39 @@ const swiper = new Swiper(".myHeroSwiper", {
   });
 
   // Close modal when clicking outside the box
+	document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelector(".login-box").style.display = "none";
+  document.getElementById("forgotPasswordBox").style.display = "block";
+});
+
+function closeForgotPassword() {
+  document.getElementById("forgotPasswordBox").style.display = "none";
+  document.querySelector(".login-box").style.display = "block";
+}
+
+
+
+document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const emailInput = document.getElementById("forgotEmail");
+  const email = emailInput.value;
+  const messageBox = document.getElementById("forgotMessageBox");
+
+  if (email.trim() === "") {
+    messageBox.innerText = "Please enter an email.";
+    messageBox.style.color = ""; // Default color
+  } else {
+    messageBox.innerText = "Email not registered";
+    messageBox.style.color = "red";
+    emailInput.value = ""; // ✅ Clear the input field
+     // ⏱️ Clear the message after 3 seconds
+    setTimeout(() => {
+      messageBox.innerText = "";
+    }, 3000);
+  }
+});
+
 	
 </script>
 
