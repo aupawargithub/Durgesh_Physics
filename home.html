@@ -154,20 +154,26 @@ header #welcome {
       margin-top: 12px;
     }
 
-    .upload-section button {
-      background: var(--primary);
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
+   .upload-section button {
+  background: linear-gradient(135deg, #4e8ef7, #1e6ce3);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(30, 108, 227, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    .upload-section button:hover {
-      background: #0056b3;
-    }
+.upload-section button:hover {
+  background: linear-gradient(135deg, #1e6ce3, #1558c4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(30, 108, 227, 0.3);
+}
+
 .popup {
   display: none;
   position: fixed;
@@ -340,7 +346,7 @@ header #welcome {
     }, 10);
 
     setTimeout(() => {
-      popupText.textContent = "File uploaded successfully!";
+      popupText.textContent = "File uploaded successfully !";
       fileInput.value = "";
 
       setTimeout(() => {
