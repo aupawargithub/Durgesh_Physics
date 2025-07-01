@@ -41,6 +41,7 @@ html, body {
   margin-bottom: 20px;
   border-radius: 10px;
   color: #fff;
+     position: relative; /* Needed for absolute positioning */
 }
 
 /* Title Styling */
@@ -66,17 +67,6 @@ header .user-info,
 header #welcome {
   font-size: 0.9rem;
   margin-top: 4px;
-}
-
-/* Responsive Title */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.4rem;
-  }
-
-  header h1 .subheading {
-    font-size: 0.9rem;
-  }
 }
 
 
@@ -214,21 +204,30 @@ header #welcome {
   100% { transform: rotate(360deg); }
 }
     
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.4rem;
-      }
+     @media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 160px;
+    padding-bottom: 60px; /* ✅ add space for the logout button */
+  }
 
-      #logoutBtn {
-        width: 100%;
-        margin-top: 10px;
-      }
+  #logoutBtn {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    width: auto;
+    margin-top: 0;
+  }
 
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+  header h1 {
+    font-size: 1.4rem;
+  }
+
+  header h1 .subheading {
+    font-size: 0.9rem;
+  }
+}
   </style>
 </head>
 <body>
