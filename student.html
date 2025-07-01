@@ -1,101 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Durgesh Physics Classes-Student Dashboard</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="logoo.png">
-  <link rel="apple-touch-icon" href="logoo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DURGESH PHYSICS CLASSES - Student Dashboard</title>
+  <link rel="icon" type="image/png" href="logoo.png">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f8;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    .header {
-      background: linear-gradient(to right, #283593, #64b5f6);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-.header p {
-    font-size: 1.3rem; /* 👈 Adjust this to your liking */
-    
-  }
-    .logout-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #d32f2f;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-     border-radius: 999px;
-      cursor: pointer;
-      font-size: 22px;
-      box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      outline: none;
-  -webkit-tap-highlight-color: transparent;
-    }
-
-    .logout-btn:hover {
-      background-color: #b71c1c;
- transform: translateY(-2px);
-   box-shadow: var(--shadow-lg);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
       color: #333;
-      margin-top: 0;
+      padding-bottom: 40px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #f0f0f0;
-    }
-    .download-box {
-  margin-top: 30px;
+  .header {
+  background: linear-gradient(to right, #283593, #64b5f6);
+  color: white;
   padding: 20px;
- 
-  border-radius: 10px;
-  background-color: white;
-       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding-bottom: 60px; /* ensures room for button */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
-.download-box h2 {
-  margin-top: 0;
-  color: #283593;
+.header h1 {
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.download-btn {
-  display: inline-block;
+.header p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.logout-btn {
+  position: absolute;
+  bottom: 20px; /* moved up from the edge */
+  right: 20px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+ border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+   box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Removed transform */
+}
+
+.logout-btn:hover {
+   background-color: #b71c1c;
+ transform: translateY(-2px);
+   box-shadow: var(--shadow-lg);
+}
+
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      color: #283593;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #c5cae9;
+      padding-bottom: 6px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .info-item {
+      background: #f0f0f5;
+      padding: 12px 16px;
+      border-radius: 6px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .download-box {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .download-btn {
+      display: inline-block;
   text-decoration: none;
   background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: #fff;
@@ -113,14 +130,26 @@
   overflow: hidden;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-}
+    }
 
-.download-btn:hover {
-  background: linear-gradient(135deg, #43a047, #1b5e20);
+    .download-btn:hover {
+      background: linear-gradient(135deg, #43a047, #1b5e20);
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(27, 94, 32, 0.2);
-}
+    }
 
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 22px;
+      }
+      .header p {
+        font-size: 14px;
+      }
+      .logout-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -132,82 +161,43 @@
   </div>
 
   <div class="container">
-    <h2>Personal Details</h2>
-    <p><strong>Name:</strong>Abhishek Jadhav</p>
-    <p><strong>Roll No:</strong> DPC134</p>
-    <p><strong>Email:</strong> abhijadhav555@gmail.com</p>
-    <p><strong>Batch:</strong> NEET 2025</p>
+    <div class="section">
+      <h2>Personal Information</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>Student ID:</strong> DPC134</div>
+        <div class="info-item"><strong>Name:</strong> Abhishek Jadhav</div>
+        <div class="info-item"><strong>Email:</strong> abhijadhav555@gmail.com</div>
+        <div class="info-item"><strong>Batch:</strong> NEET 2025</div>
+        <div class="info-item"><strong>Standard:</strong> 12th</div>
+      </div>
+    </div>
 
-    <h2>Month-wise Marks</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Month</th>
-          <th>Test Name</th>
-          <th>Marks Obtained</th>
-          <th>Total Marks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>January</td>
-          <td>Chapter Test: Motion</td>
-          <td>42</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>February</td>
-          <td>Unit Test: Laws of Motion</td>
-          <td>38</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>March</td>
-          <td>Half-Yearly</td>
-          <td>75</td>
-          <td>100</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="section">
+      <h2>Monthly Marks</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>January:</strong> 78%</div>
+        <div class="info-item"><strong>February:</strong> 82%</div>
+        <div class="info-item"><strong>March:</strong> 75%</div>
+        <!-- Add more months as needed -->
+      </div>
+    </div>
 
-    <h2>Month-wise Attendance</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Month</th>
-          <th>Total Classes</th>
-          <th>Attended</th>
-          <th>Attendance %</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>January</td>
-          <td>20</td>
-          <td>18</td>
-          <td>90%</td>
-        </tr>
-        <tr>
-          <td>February</td>
-          <td>22</td>
-          <td>20</td>
-          <td>91%</td>
-        </tr>
-        <tr>
-          <td>March</td>
-          <td>25</td>
-          <td>24</td>
-          <td>96%</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="section">
+      <h2>Attendance</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>January:</strong> 90%</div>
+        <div class="info-item"><strong>February:</strong> 85%</div>
+        <div class="info-item"><strong>March:</strong> 92%</div>
+      </div>
+    </div>
+
+    <div class="section download-box">
+      <h2>Download Study Material</h2>
+      <p>Click the button below to download the latest notes and study materials for your batch.</p>
+      <a href="Durgesh_Physics_Notes.pdf" download class="download-btn">Download</a>
+    </div>
   </div>
-<div class="download-box">
-  <h2>Download Study Material</h2>
-  <p>Click the button below to download the latest notes and study materials for your batch.</p>
- <a href="Durgesh_Physics_Notes.pdf" download class="download-btn">Download</a>
 
-</div>
   <script>
   // 🔒 Check login status and redirect if not logged in
   const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
@@ -238,7 +228,5 @@
     window.location.href = "index.html";
   }
 </script>
-
-
 </body>
 </html>
