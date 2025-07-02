@@ -1530,7 +1530,7 @@ const swiper = new Swiper(".myHeroSwiper", {
   const users = [
     { email: "durgeshpawar883@gmail.com", password: "dgp4912" },
     { email: "abhijadhav555@gmail.com", password: "abhi1526" },
-    { email: "akash@example.com", password: "secret456" }
+    { email: "neetamore779@gmail.com", password: "neeta1526" }
   ];
 
   // Check if already logged in
@@ -1590,12 +1590,14 @@ const swiper = new Swiper(".myHeroSwiper", {
       messageBox.style.color = "green";
       messageBox.textContent = "Login successful! Redirecting...";
       setTimeout(() => {
-      if (email === "abhijadhav555@gmail.com") {
-        window.location.href = "student.html";
-      } else {
-        window.location.href = "home.html";
-      }
-    }, 1000);
+  if (email === "abhijadhav555@gmail.com") {
+    window.location.href = "student.html";
+  } else if (email === "neetamore779@gmail.com") {
+    window.location.href = "student02.html";
+  } else {
+    window.location.href = "home.html";
+  }
+}, 1000);
     } else {
       messageBox.style.color = "red";
       messageBox.textContent = "Invalid email or password.";
@@ -1626,7 +1628,7 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", functio
     messageBox.innerText = "Please enter an email.";
     messageBox.style.color = ""; // Default color
   } else if (email === "durgeshpawar883@gmail.com" ||
-    email === "abhijadhav555@gmail.com") {
+    email === "abhijadhav555@gmail.com" || email === "neetamore779@gmail.com") {
     messageBox.innerText = "Password reset successful. Please check your email.";
     messageBox.style.color = "green";
     emailInput.value = "";
