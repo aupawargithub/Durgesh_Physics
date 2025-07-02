@@ -117,31 +117,37 @@
     }
 
     .download-btn {
-      display: inline-block;
+  display: inline-block;
   text-decoration: none;
   background: linear-gradient(135deg, #4caf50, #2e7d32);
   color: #fff;
   border: none;
-  padding: 15px 33px;
-  font-size: 21px;
-   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
+  padding: 14px 36px;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
   border-radius: 999px;
   cursor: pointer;
   margin-top: 16px;
-  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.1);
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.25);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-    }
+  user-select: none;
+}
 
-    .download-btn:hover {
-      background: linear-gradient(135deg, #43a047, #1b5e20);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(27, 94, 32, 0.2);
-    }
+.download-btn:hover {
+  background: linear-gradient(135deg, #43a047, #1b5e20);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
+}
+
+.download-btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 4px 10px rgba(27, 94, 32, 0.2);
+}
 
     @media (max-width: 600px) {
       .header h1 {
