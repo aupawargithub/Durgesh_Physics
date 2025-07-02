@@ -1506,6 +1506,7 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
+
   let auth0 = null;
 
   const config = {
@@ -1514,10 +1515,11 @@ const swiper = new Swiper(".myHeroSwiper", {
     redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
   };
 
+  // Initialize Auth0 and check for existing login
   async function initAuth() {
     auth0 = await createAuth0Client(config);
 
-    // Handle redirect from Auth0
+    // Handle redirect from Auth0 after login
     if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
       await auth0.handleRedirectCallback();
       window.history.replaceState({}, document.title, window.location.pathname);
@@ -1529,6 +1531,7 @@ const swiper = new Swiper(".myHeroSwiper", {
       const user = await auth0.getUser();
       document.getElementById("status").textContent = `Welcome, ${user.email}`;
 
+      // Redirect based on user email
       if (user.email === "abhijadhav555@gmail.com") {
         window.location.href = "student.html";
       } else {
@@ -1537,29 +1540,36 @@ const swiper = new Swiper(".myHeroSwiper", {
     }
   }
 
-  function loginWithAuth0() {
-    auth0.loginWithRedirect({
+  // Secure login trigger
+  async function loginWithAuth0() {
+    // Ensure auth0 is initialized
+    if (!auth0) {
+      auth0 = await createAuth0Client(config);
+    }
+
+    await auth0.loginWithRedirect({
       authorizationParams: {
         redirect_uri: config.redirect_uri
       }
     });
   }
 
-  // Show modal
-  document.getElementById("loginBtn").addEventListener("click", () => {
-    document.getElementById("loginModal").style.display = "flex";
+  // Show modal when Login button clicked
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      document.getElementById("loginModal").style.display = "flex";
+    });
+
+    // Initialize Auth0 after DOM is ready
+    initAuth();
   });
 
-  // Close modal
+  // Close login modal
   function closeLogin() {
     document.getElementById("loginModal").style.display = "none";
   }
-
-  window.onload = initAuth;
-
-
-	
 </script>
+
 
 </body>
 </html>
