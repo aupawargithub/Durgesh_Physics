@@ -1074,7 +1074,7 @@ font-weight: 200;
     <h2>Login</h2>
 
     <!-- Auth0 Secure Login Button -->
-    <button type="button" onclick="loginWithAuth0()">🔐 Secure Login with Auth0</button>
+   <button id="secureLoginBtn" type="button">🔐 Secure Login with Auth0</button>
 
     <!-- Optional: Forgot Password message (you can handle it via Auth0 later) -->
     <a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
@@ -1507,7 +1507,7 @@ const swiper = new Swiper(".myHeroSwiper", {
   },
 });
 
-  let auth0 = null;
+ let auth0 = null;
 
   const config = {
     domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
@@ -1515,23 +1515,28 @@ const swiper = new Swiper(".myHeroSwiper", {
     redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
   };
 
-  // Initialize Auth0 and check for existing login
+  // Step 1: Auth0 initialization and redirect handler
   async function initAuth() {
     auth0 = await createAuth0Client(config);
 
-    // Handle redirect from Auth0 after login
+    // If returned from Auth0 with code/state, handle redirect
     if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-      await auth0.handleRedirectCallback();
-      window.history.replaceState({}, document.title, window.location.pathname);
+      try {
+        await auth0.handleRedirectCallback();
+        window.history.replaceState({}, document.title, "/Durgesh_Physics/");
+      } catch (err) {
+        console.error("Auth0 Redirect Error:", err);
+      }
     }
 
+    // Check login status
     const isAuthenticated = await auth0.isAuthenticated();
 
     if (isAuthenticated) {
       const user = await auth0.getUser();
       document.getElementById("status").textContent = `Welcome, ${user.email}`;
 
-      // Redirect based on user email
+      // 🔁 Redirect based on email
       if (user.email === "abhijadhav555@gmail.com") {
         window.location.href = "student.html";
       } else {
@@ -1540,9 +1545,8 @@ const swiper = new Swiper(".myHeroSwiper", {
     }
   }
 
-  // Secure login trigger
+  // Step 2: Login handler
   async function loginWithAuth0() {
-    // Ensure auth0 is initialized
     if (!auth0) {
       auth0 = await createAuth0Client(config);
     }
@@ -1554,20 +1558,31 @@ const swiper = new Swiper(".myHeroSwiper", {
     });
   }
 
-  // Show modal when Login button clicked
+  // Step 3: DOM Ready
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      document.getElementById("loginModal").style.display = "flex";
-    });
+    const loginBtn = document.getElementById("loginBtn");
+    const loginModal = document.getElementById("loginModal");
+    const closeBtn = document.querySelector(".close-btn");
+    const secureLoginBtn = document.getElementById("secureLoginBtn");
 
-    // Initialize Auth0 after DOM is ready
-    initAuth();
+    if (loginBtn) {
+      loginBtn.addEventListener("click", () => {
+        loginModal.style.display = "flex";
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        loginModal.style.display = "none";
+      });
+    }
+
+    if (secureLoginBtn) {
+      secureLoginBtn.addEventListener("click", loginWithAuth0);
+    }
+
+    initAuth(); // Start Auth0 logic
   });
-
-  // Close login modal
-  function closeLogin() {
-    document.getElementById("loginModal").style.display = "none";
-  }
 </script>
 
 
