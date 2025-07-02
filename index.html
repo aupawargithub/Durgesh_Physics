@@ -1068,24 +1068,15 @@ font-weight: 200;
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
 	
-	<!-- ✅ Login Modal (UI Only) -->
-<div id="loginModal" style="display: none;">
-  <div class="login-box">
-    <span class="close-btn" onclick="closeLogin()">×</span>
-    <h2>Login</h2>
-
-    <!-- Auth0 Secure Login Button -->
-   <button id="secureLoginBtn" type="button">🔐 Secure Login with Auth0</button>
-
-    <!-- Optional: Forgot Password message (you can handle it via Auth0 later) -->
-    <a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
-
-    <div class="message" id="messageBox"></div>
+	<div id="loginModal">
+    <div class="login-box">
+      <span class="close-btn" onclick="closeLogin()">×</span>
+      <h2>Login</h2>
+      <button id="secureLoginBtn">🔐 Secure Login with Auth0</button>
+    </div>
   </div>
-</div>
 
-<p id="status" style="text-align:center;"></p>
-
+  <p id="status"></p>
 
 
   <section id="about">
@@ -1510,80 +1501,67 @@ const swiper = new Swiper(".myHeroSwiper", {
 
  let auth0 = null;
 
-  const config = {
-    domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
-    client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt",
-    redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
-  };
+    const config = {
+      domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",  // ✅ Replace with your Auth0 domain
+      client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt", // ✅ Replace with your Auth0 client ID
+      redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
+    };
 
-  // Step 1: Auth0 initialization and redirect handler
-  async function initAuth() {
-    auth0 = await createAuth0Client(config);
-
-    // If returned from Auth0 with code/state, handle redirect
-    if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-      try {
-        await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/Durgesh_Physics/");
-      } catch (err) {
-        console.error("Auth0 Redirect Error:", err);
-      }
-    }
-
-    // Check login status
-    const isAuthenticated = await auth0.isAuthenticated();
-
-    if (isAuthenticated) {
-      const user = await auth0.getUser();
-      document.getElementById("status").textContent = `Welcome, ${user.email}`;
-
-      // 🔁 Redirect based on email
-      if (user.email === "abhijadhav555@gmail.com") {
-        window.location.href = "student.html";
-      } else {
-        window.location.href = "home.html";
-      }
-    }
-  }
-
-  // Step 2: Login handler
-  async function loginWithAuth0() {
-    if (!auth0) {
+    async function initAuth() {
       auth0 = await createAuth0Client(config);
+
+      if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+        try {
+          await auth0.handleRedirectCallback();
+          window.history.replaceState({}, document.title, "/Durgesh_Physics/");
+        } catch (e) {
+          console.error("Auth0 Error:", e);
+        }
+      }
+
+      const isAuthenticated = await auth0.isAuthenticated();
+
+      if (isAuthenticated) {
+        const user = await auth0.getUser();
+        document.getElementById("status").textContent = `Welcome, ${user.email}`;
+
+        if (user.email === "abhijadhav555@gmail.com") {
+          window.location.href = "student.html";
+        } else {
+          window.location.href = "home.html";
+        }
+      }
     }
 
-    await auth0.loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: config.redirect_uri
+    async function loginWithAuth0() {
+      if (!auth0) {
+        auth0 = await createAuth0Client(config);
       }
-    });
-  }
 
-  // Step 3: DOM Ready
-  document.addEventListener("DOMContentLoaded", () => {
-    const loginBtn = document.getElementById("loginBtn");
-    const loginModal = document.getElementById("loginModal");
-    const closeBtn = document.querySelector(".close-btn");
-    const secureLoginBtn = document.getElementById("secureLoginBtn");
+      await auth0.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: config.redirect_uri
+        }
+      });
+    }
 
-    if (loginBtn) {
+    function closeLogin() {
+      document.getElementById("loginModal").style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginBtn = document.getElementById("loginBtn");
+      const secureLoginBtn = document.getElementById("secureLoginBtn");
+      const loginModal = document.getElementById("loginModal");
+
       loginBtn.addEventListener("click", () => {
         loginModal.style.display = "flex";
       });
-    }
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
-        loginModal.style.display = "none";
-      });
-    }
-
-    if (secureLoginBtn) {
       secureLoginBtn.addEventListener("click", loginWithAuth0);
-    }
 
-    initAuth(); // Start Auth0 logic
-  });
+      initAuth();
+    });
 </script>
 
 
