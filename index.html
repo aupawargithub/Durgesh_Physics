@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	
-
   <title>Durgesh Physics Classes</title>
    <!-- Favicon for browser tab -->
   <link rel="icon" type="image/png" sizes="32x32" href="logoo.png">
   <link rel="apple-touch-icon" href="logoo.png">
- <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
  <link
@@ -20,7 +18,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
-	
+
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <style>
@@ -973,16 +971,6 @@ font-weight: 200;
       background: #0056b3;
     }
 
-  #secureLoginBtn {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-	   #status {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-    }
     .close-btn {
       position: absolute;
       top: 10px;
@@ -1078,16 +1066,37 @@ font-weight: 200;
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
 	
-	<!-- ✅ Login Modal -->
-  <div id="loginModal">
-    <div class="login-box">
-      <span class="close-btn" id="closeBtn">×</span>
-      <h2>Login</h2>
-      <button id="secureLoginBtn">🔐 Secure Login with Auth0</button>
-    </div>
-  </div>
+	<div id="loginModal">
+  <div class="login-box">
+    <span class="close-btn" onclick="closeLogin()">×</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Password" required>
+        <span id="togglePassword" class="eye-icon">👁️</span>
+      </div>
+      <label>
+        <input type="checkbox" id="rememberMe"> Remember Me
+      </label>
+      <button type="submit">Login</button>
+    </form>
+	   <!-- Add inside your existing login-box, below the login button -->
+<a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
 
-  <p id="status"></p>
+    <div class="message" id="messageBox"></div>
+  </div>
+		<!-- Forgot Password Box -->
+  <div class="login-box" id="forgotPasswordBox" style="display: none;">
+    <span class="close-btn" onclick="closeForgotPassword()">×</span>
+    <h2>Forgot Password</h2>
+    <form id="forgotPasswordForm">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="message" id="forgotMessageBox"></div>
+  </div>
+</div>
 
 
   <section id="about">
@@ -1509,74 +1518,138 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
+ // DOM references
+  const loginBtn = document.getElementById("loginBtn");
+  const fixedLoginBtn = document.getElementById("fixedLoginBtn");
+  const loginModal = document.getElementById("loginModal");
+  const messageBox = document.getElementById("messageBox");
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
 
- let auth0 = null;
+  // Predefined users
+  const users = [
+    { email: "durgeshpawar883@gmail.com", password: "dgp4912" },
+    { email: "abhijadhav555@gmail.com", password: "abhi1526" },
+    { email: "neetamore779@gmail.com", password: "neeta1526" }
+  ];
 
-    const config = {
-      domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
-      client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt",
-      redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
-    };
+  // Check if already logged in
+  const isLoggedIn =
+    localStorage.getItem("loggedIn") === "true" ||
+    sessionStorage.getItem("loggedIn") === "true";
 
-    async function initAuth() {
-      auth0 = await createAuth0Client(config);
+  if (isLoggedIn) {
+    window.location.href = "home.html";
+  }
 
-      if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-        try {
-          await auth0.handleRedirectCallback();
-          window.history.replaceState({}, document.title, "/Durgesh_Physics/");
-        } catch (e) {
-          console.error("Auth0 Error:", e);
-        }
+  // Open login modal (shared function)
+  function openLogin() {
+    loginModal.style.display = "flex";
+    messageBox.textContent = "";
+  }
+
+  // Close login modal
+  function closeLogin() {
+    loginModal.style.display = "none";
+    messageBox.textContent = "";
+  }
+
+  // Toggle password visibility
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.getAttribute("type") === "password";
+    passwordInput.setAttribute("type", isPassword ? "text" : "password");
+    togglePassword.textContent = isPassword ? "🙈" : "👁️";
+  });
+
+  // Assign open modal to both buttons
+  loginBtn.onclick = openLogin;
+  fixedLoginBtn.onclick = openLogin;
+
+  // Login form submission
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const remember = document.getElementById("rememberMe").checked;
+
+    const user = users.find(
+      user => user.email === email && user.password === password
+    );
+
+    if (user) {
+      // Store login state
+      if (remember) {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userEmail", email);
+      } else {
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("userEmail", email);
       }
 
-      const isAuthenticated = await auth0.isAuthenticated();
-
-      if (isAuthenticated) {
-        const user = await auth0.getUser();
-        document.getElementById("status").textContent = `Welcome, ${user.email}`;
-
-        if (user.email === "abhijadhav555@gmail.com") {
-          window.location.href = "student.html";
-        } else {
-          window.location.href = "home.html";
-        }
-      }
+      messageBox.style.color = "green";
+      messageBox.textContent = "Login successful! Redirecting...";
+      setTimeout(() => {
+  if (email === "abhijadhav555@gmail.com") {
+    window.location.href = "student.html";
+  } else if (email === "neetamore779@gmail.com") {
+    window.location.href = "student02.html";
+  } else {
+    window.location.href = "home.html";
+  }
+}, 1000);
+    } else {
+      messageBox.style.color = "red";
+      messageBox.textContent = "Invalid email or password.";
     }
+  });
 
-    async function loginWithAuth0() {
-      if (!auth0) {
-        auth0 = await createAuth0Client(config);
-      }
+  // Close modal when clicking outside the box
+	document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelector(".login-box").style.display = "none";
+  document.getElementById("forgotPasswordBox").style.display = "block";
+});
 
-      await auth0.loginWithRedirect({
-        authorizationParams: {
-          redirect_uri: config.redirect_uri
-        }
-      });
-    }
+function closeForgotPassword() {
+  document.getElementById("forgotPasswordBox").style.display = "none";
+  document.querySelector(".login-box").style.display = "block";
+}
 
-    function closeLogin() {
-      document.getElementById("loginModal").style.display = "none";
-    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const loginBtn = document.getElementById("loginBtn");
-      const secureLoginBtn = document.getElementById("secureLoginBtn");
-      const loginModal = document.getElementById("loginModal");
-      const closeBtn = document.getElementById("closeBtn");
 
-      loginBtn.addEventListener("click", () => {
-        loginModal.style.display = "flex";
-      });
+document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const emailInput = document.getElementById("forgotEmail");
+  const email = emailInput.value;
+  const messageBox = document.getElementById("forgotMessageBox");
 
-      secureLoginBtn.addEventListener("click", loginWithAuth0);
-      closeBtn.addEventListener("click", closeLogin);
+  if (email.trim() === "") {
+    messageBox.innerText = "Please enter an email.";
+    messageBox.style.color = ""; // Default color
+  } else if (email === "durgeshpawar883@gmail.com" ||
+    email === "abhijadhav555@gmail.com" || email === "neetamore779@gmail.com") {
+    messageBox.innerText = "Password reset successful. Please check your email.";
+    messageBox.style.color = "green";
+    emailInput.value = "";
 
-      initAuth();
-    });
+    // Clear message after 3 seconds
+    setTimeout(() => {
+      messageBox.innerText = "";
+    }, 3000);
+  } else {
+    messageBox.innerText = "Email not registered";
+    messageBox.style.color = "red";
+    emailInput.value = ""; // ✅ Clear the input field
+     // ⏱️ Clear the message after 3 seconds
+    setTimeout(() => {
+      messageBox.innerText = "";
+    }, 3000);
+  }
+});
+
+	
 </script>
-
 
 </body>
 </html>
