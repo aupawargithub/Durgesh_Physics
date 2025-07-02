@@ -973,6 +973,16 @@ font-weight: 200;
       background: #0056b3;
     }
 
+  #secureLoginBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+	   #status {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
     .close-btn {
       position: absolute;
       top: 10px;
@@ -1068,9 +1078,10 @@ font-weight: 200;
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
 	
-	<div id="loginModal">
+	<!-- ✅ Login Modal -->
+  <div id="loginModal">
     <div class="login-box">
-      <span class="close-btn" onclick="closeLogin()">×</span>
+      <span class="close-btn" id="closeBtn">×</span>
       <h2>Login</h2>
       <button id="secureLoginBtn">🔐 Secure Login with Auth0</button>
     </div>
@@ -1502,8 +1513,8 @@ const swiper = new Swiper(".myHeroSwiper", {
  let auth0 = null;
 
     const config = {
-      domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",  // ✅ Replace with your Auth0 domain
-      client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt", // ✅ Replace with your Auth0 client ID
+      domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
+      client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt",
       redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
     };
 
@@ -1553,12 +1564,14 @@ const swiper = new Swiper(".myHeroSwiper", {
       const loginBtn = document.getElementById("loginBtn");
       const secureLoginBtn = document.getElementById("secureLoginBtn");
       const loginModal = document.getElementById("loginModal");
+      const closeBtn = document.getElementById("closeBtn");
 
       loginBtn.addEventListener("click", () => {
         loginModal.style.display = "flex";
       });
 
       secureLoginBtn.addEventListener("click", loginWithAuth0);
+      closeBtn.addEventListener("click", closeLogin);
 
       initAuth();
     });
