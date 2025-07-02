@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DURGESH PHYSICS CLASSES - Student Dashboard</title>
+  <link rel="icon" type="image/png" href="logoo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      padding-bottom: 40px;
+    }
+
+  .header {
+  background: linear-gradient(to right, #283593, #64b5f6);
+  color: white;
+  padding: 20px;
+  padding-bottom: 60px; /* ensures room for button */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.header p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.logout-btn {
+  position: absolute;
+  bottom: 20px; /* moved up from the edge */
+  right: 20px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+ border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+   box-shadow: var(--shadow-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Removed transform */
+}
+
+.logout-btn:hover {
+   background-color: #b71c1c;
+ transform: translateY(-2px);
+   box-shadow: var(--shadow-lg);
+}
+
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      color: #283593;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #c5cae9;
+      padding-bottom: 6px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .info-item {
+      background: #f0f0f5;
+      padding: 12px 16px;
+      border-radius: 6px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .download-box {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .download-btn {
+      display: inline-block;
+  text-decoration: none;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
+  border: none;
+  padding: 15px 33px;
+  font-size: 21px;
+   font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-top: 16px;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, #43a047, #1b5e20);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(27, 94, 32, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 22px;
+      }
+      .header p {
+        font-size: 14px;
+      }
+      .logout-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>DURGESH PHYSICS CLASSES</h1>
+    <p>Student Dashboard</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <h2>Personal Information</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>Student ID:</strong> DPC140</div>
+        <div class="info-item"><strong>Name:</strong> Neeta More</div>
+        <div class="info-item"><strong>Email:</strong> neetamore779@gmail.com</div>
+        <div class="info-item"><strong>Batch:</strong> NEET 2025</div>
+        <div class="info-item"><strong>Standard:</strong> 12th</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Monthly Marks</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>January:</strong> 75/100</div>
+        <div class="info-item"><strong>February:</strong> 79/100</div>
+        <div class="info-item"><strong>March:</strong> 88/100</div>
+        <!-- Add more months as needed -->
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Attendance</h2>
+      <div class="info-grid">
+        <div class="info-item"><strong>January:</strong> 90%</div>
+        <div class="info-item"><strong>February:</strong> 85%</div>
+        <div class="info-item"><strong>March:</strong> 92%</div>
+      </div>
+    </div>
+
+    <div class="section download-box">
+      <h2>Download Study Material</h2>
+      <p>Click the button below to download the latest notes and study materials for your batch.</p>
+      <a href="Durgesh_Physics_Notes.pdf" download class="download-btn">Download</a>
+    </div>
+  </div>
+
+  <script>
+  // 🔒 Check login status and redirect if not logged in
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+  const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
+
+  if (!isLoggedIn) {
+    window.location.href = "index.html";  // Redirect to index page
+  } else {
+    // 👋 Set welcome message
+    const welcomeText = document.getElementById("welcome");
+    if (welcomeText) {
+      welcomeText.innerText = `Logged in as admin: ${userEmail}`;
+    }
+  }
+
+  // 🔓 Logout button event (if using event listener)
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+  }
+
+  // 🔁 Universal logout function (also can be used in HTML: onclick="logout()")
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    sessionStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    sessionStorage.removeItem("userEmail");
+    window.location.href = "index.html";
+  }
+</script>
+</body>
+</html>
