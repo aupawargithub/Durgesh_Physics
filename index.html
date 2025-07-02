@@ -1067,37 +1067,24 @@ font-weight: 200;
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
 	
-	<div id="loginModal">
+	<!-- ✅ Login Modal (UI Only) -->
+<div id="loginModal" style="display: none;">
   <div class="login-box">
     <span class="close-btn" onclick="closeLogin()">×</span>
     <h2>Login</h2>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required>
-      <div class="password-container">
-        <input type="password" id="password" placeholder="Password" required>
-        <span id="togglePassword" class="eye-icon">👁️</span>
-      </div>
-      <label>
-        <input type="checkbox" id="rememberMe"> Remember Me
-      </label>
-      <button type="submit">Login</button>
-    </form>
-	   <!-- Add inside your existing login-box, below the login button -->
-<a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
+
+    <!-- Auth0 Secure Login Button -->
+    <button type="button" onclick="loginWithAuth0()">🔐 Secure Login with Auth0</button>
+
+    <!-- Optional: Forgot Password message (you can handle it via Auth0 later) -->
+    <a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
 
     <div class="message" id="messageBox"></div>
   </div>
-		<!-- Forgot Password Box -->
-  <div class="login-box" id="forgotPasswordBox" style="display: none;">
-    <span class="close-btn" onclick="closeForgotPassword()">×</span>
-    <h2>Forgot Password</h2>
-    <form id="forgotPasswordForm">
-      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
-      <button type="submit">Submit</button>
-    </form>
-    <div class="message" id="forgotMessageBox"></div>
-  </div>
 </div>
+
+<p id="status" style="text-align:center;"></p>
+
 
 
   <section id="about">
@@ -1519,48 +1506,57 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
- let auth0 = null;
+  let auth0 = null;
 
-// 🔁 Replace these with your real Auth0 values
-const config = {
-  domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",         // e.g., dev-abc123.us.auth0.com
-  client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt",
-  redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
-};
+  const config = {
+    domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
+    client_id: "CBIoyE38b31gm3IAuPLhkIissXRaXRLt",
+    redirect_uri: "https://aupawargithub.github.io/Durgesh_Physics/"
+  };
 
-async function initAuth() {
-  auth0 = await createAuth0Client(config);
+  async function initAuth() {
+    auth0 = await createAuth0Client(config);
 
-  // Check if redirected back from Auth0 login
-  if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-    await auth0.handleRedirectCallback();
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
+    // Handle redirect from Auth0
+    if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+      await auth0.handleRedirectCallback();
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
-  const isAuthenticated = await auth0.isAuthenticated();
+    const isAuthenticated = await auth0.isAuthenticated();
 
-  if (isAuthenticated) {
-    const user = await auth0.getUser();
-    document.getElementById("status").textContent = `Welcome, ${user.email}`;
+    if (isAuthenticated) {
+      const user = await auth0.getUser();
+      document.getElementById("status").textContent = `Welcome, ${user.email}`;
 
-    // ✅ Email-based redirection
-    if (user.email === "abhijadhav555@gmail.com") {
-      window.location.href = "student.html";
-    } else {
-      window.location.href = "home.html";
+      if (user.email === "abhijadhav555@gmail.com") {
+        window.location.href = "student.html";
+      } else {
+        window.location.href = "home.html";
+      }
     }
   }
-}
 
-document.getElementById("loginBtn").addEventListener("click", () => {
-  auth0.loginWithRedirect({
-    authorizationParams: {
-      redirect_uri: config.redirect_uri
-    }
+  function loginWithAuth0() {
+    auth0.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: config.redirect_uri
+      }
+    });
+  }
+
+  // Show modal
+  document.getElementById("loginBtn").addEventListener("click", () => {
+    document.getElementById("loginModal").style.display = "flex";
   });
-});
 
-window.onload = initAuth;
+  // Close modal
+  function closeLogin() {
+    document.getElementById("loginModal").style.display = "none";
+  }
+
+  window.onload = initAuth;
+
 
 	
 </script>
