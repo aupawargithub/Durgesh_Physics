@@ -277,6 +277,22 @@ header #welcome {
     font-size: 0.9rem;
   }
 }
+    .card button {
+  float: right;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #2c80b4;
+}
+
   </style>
 </head>
 <body>
@@ -329,32 +345,47 @@ header #welcome {
   <p id="popupText">Uploading file...</p>
 </div>
 
-    <!-- Class Schedule -->
-    <div class="card">
-      <h2>Class Schedule</h2>
-      <ul>
-       <li>Mon - SSC Board: 10 AM - 12 PM</li>
-        <li>Tue - HSC Board: 10 AM - 12 PM</li>
-        <li>Wed - JEE/NEET:  2 PM  -  4 PM</li>
-        <li>Thu - JEE/NEET:  10 AM - 12 PM</li>
-        <li>Fri - SSC & HSC: 11 AM - 1 PM</li>
-        <li>Sat - JEE/NEET:  10 AM - 12 PM</li>
-        <li>Sun - Test:      10 AM - 12 PM</li>
-      </ul>
-    </div>
-
-    <!-- Notices -->
-    <div class="card">
-      <h2>Important Notices</h2>
-      <ul>
-        <li>📢 Next mock test on 15th July</li>
-        <li>📢 Q/A session on 21st July</li>
-        <li>📢 Fees deadline: 20th July</li>
-        <li>📢 New Batch Starts: 27th July</li>
-        <li>📢 Practical sessions start next week</li>
-      </ul>
-    </div>
+   <!-- 📚 Course & Batch Management -->
+<div class="card expandable-card">
+  <h2 onclick="toggleCard(this)">Course & Batch Management ▾</h2>
+  <div class="card-content">
+    <ul>
+      <li>Add/Edit Courses <button onclick="alert('Add Course')">Add</button></li>
+      <li>Assign Subjects <button onclick="alert('Assign Subject')">Assign</button></li>
+      <li>Create Batches <button onclick="alert('Create Batch')">Create</button></li>
+      <li>Set Timetable <button onclick="alert('Set Timetable')">Set</button></li>
+    </ul>
   </div>
+</div>
+
+<!-- 🧪 Test & Exam Management -->
+<div class="card expandable-card">
+  <h2 onclick="toggleCard(this)">Test & Exam Management ▾</h2>
+  <div class="card-content">
+    <ul>
+      <li>Upload Test Papers <button onclick="alert('Upload Test')">Upload</button></li>
+      <li>MCQ Auto Evaluation <button onclick="alert('Evaluate MCQ')">Evaluate</button></li>
+      <li>Manual Mark Entry <button onclick="alert('Enter Marks')">Enter</button></li>
+      <li>Generate Rank List <button onclick="alert('Generate Rank')">Generate</button></li>
+      <li>View Reports <button onclick="alert('View Reports')">View</button></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 📢 Communication Tools -->
+<div class="card expandable-card">
+  <h2 onclick="toggleCard(this)">Communication Tools ▾</h2>
+  <div class="card-content">
+    <ul>
+      <li>Send SMS <button onclick="alert('Send SMS')">Send</button></li>
+      <li>WhatsApp Notice <button onclick="alert('Send WhatsApp')">Send</button></li>
+      <li>Email Circular <button onclick="alert('Send Email')">Send</button></li>
+      <li>Batch Announcements <button onclick="alert('Announce')">Announce</button></li>
+      <li>Auto Alerts for Absentees <button onclick="alert('Auto Alert')">Enable</button></li>
+    </ul>
+  </div>
+</div>
+
 
   <script>
     const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
@@ -406,6 +437,21 @@ header #welcome {
       }, 1000);
     }, 1000);
   }
+    function toggleCard(header) {
+    const content = header.nextElementSibling;
+    content.style.display = content.style.display === "none" ? "block" : "none";
+    header.innerHTML = header.innerHTML.includes('▾')
+      ? header.innerHTML.replace('▾', '▸')
+      : header.innerHTML.replace('▸', '▾');
+  }
+
+  // Collapse all cards by default on mobile
+  window.onload = () => {
+    const isMobile = window.innerWidth <= 600;
+    if (isMobile) {
+      document.querySelectorAll('.card-content').forEach(div => div.style.display = 'none');
+    }
+  };
   </script>
 </body>
 </html>
