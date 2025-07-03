@@ -1491,17 +1491,16 @@ const swiper = new Swiper(".myHeroSwiper", {
  
 	
 </script>
-<!-- ✅ Load Auth0 SDK first -->
-<script src="https://cdn.auth0.com/js/auth0-spa-js/1.25/auth0-spa-js.production.js" defer></script>
+ <script src="https://cdn.auth0.com/js/auth0-spa-js/1.25/auth0-spa-js.production.js"></script>
 
-<!-- ✅ Then load auth.js after SDK is guaranteed to be loaded -->
-<script>
-  window.addEventListener("DOMContentLoaded", function () {
-    const script = document.createElement("script");
-    script.src = "auth.js";
-    document.body.appendChild(script);
-  });
-</script>
+  <!-- Then load auth.js only after page is fully parsed -->
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      const authScript = document.createElement("script");
+      authScript.src = "auth.js";
+      document.body.appendChild(authScript);
+    });
+  </script>
 
 </body>
 </html>
