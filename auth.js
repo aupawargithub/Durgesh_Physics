@@ -1,4 +1,4 @@
-<script>
+
 let auth0 = null;
 
 const config = {
@@ -23,4 +23,3 @@ window.onload = async () => {
   await configureClient();
   document.getElementById("loginBtn").addEventListener("click", login);
 };
-</script>
