@@ -7,7 +7,7 @@ const config = {
 };
 
 async function configureClient() {
-  // createAuth0Client is available ONLY if SDK loaded first
+  // ✅ This will only work if the Auth0 SDK loaded BEFORE this script
   auth0 = await createAuth0Client(config);
 }
 
@@ -17,9 +17,5 @@ async function login() {
 
 window.onload = async () => {
   await configureClient();
-
-  const btn = document.getElementById("loginBtn");
-  if (!btn) return console.error("loginBtn not found");
-
-  btn.addEventListener("click", login);
+  document.getElementById("loginBtn")?.addEventListener("click", login);
 };
