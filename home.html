@@ -6,7 +6,6 @@
   <title>Durgesh Physics Classes - Admin Dashboard</title>
   <link rel="icon" type="image/png" sizes="32x32" href="logoo.png">
   <link rel="apple-touch-icon" href="logoo.png">
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.25/auth0-spa-js.production.js"></script>
   <style>
     :root {
       --primary: #007bff;
@@ -332,49 +331,23 @@ header #welcome {
   </div>
 
   <script>
-    let auth0 = null;
+    const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+    const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
-    const config = {
-      domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
-      client_id: "GHGUu4PxLHtzcFotqc5NhfCuq4GOyeBh",
-      redirect_uri: window.location.origin + "/Durgesh_Physics/home.html"
-    };
+    if (!isLoggedIn) {
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("welcome").innerText = `Logged in as admin: ${userEmail}`;
+    }
 
-    const configureClient = async () => {
-      auth0 = await createAuth0Client({
-        domain: config.domain,
-        client_id: config.client_id,
-        redirect_uri: config.redirect_uri
-      });
-    };
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("userEmail");
+      sessionStorage.removeItem("loggedIn");
+      sessionStorage.removeItem("userEmail");
+      window.location.href = "index.html";
+    });
 
-    const handleRedirect = async () => {
-      const query = window.location.search;
-      if (query.includes("code=") && query.includes("state=")) {
-        await auth0.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/Durgesh_Physics/home.html");
-      }
-
-      const isAuthenticated = await auth0.isAuthenticated();
-      if (!isAuthenticated) {
-        window.location.href = "index.html";
-      } else {
-        const user = await auth0.getUser();
-        document.getElementById("welcome").innerText = `Logged in as ${user.email}`;
-      }
-    };
-
-    const logout = () => {
-      auth0.logout({
-        returnTo: window.location.origin + "/Durgesh_Physics/index.html"
-      });
-    };
-
-    window.onload = async () => {
-      await configureClient();
-      await handleRedirect();
-      document.getElementById("logoutBtn").addEventListener("click", logout);
-    };
      function simulateUpload() {
     const popup = document.getElementById('uploadPopup');
     const popupText = document.getElementById('popupText');
