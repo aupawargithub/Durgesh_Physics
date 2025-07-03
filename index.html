@@ -7,10 +7,8 @@
    <!-- Favicon for browser tab -->
   <link rel="icon" type="image/png" sizes="32x32" href="logoo.png">
   <link rel="apple-touch-icon" href="logoo.png">
-
-
-
-
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
  <link
     rel="stylesheet"
@@ -1068,7 +1066,38 @@ font-weight: 200;
 <!-- Pagination goes here -->
 <div class="swiper-pagination"></div>
 	
-	
+	<div id="loginModal">
+  <div class="login-box">
+    <span class="close-btn" onclick="closeLogin()">×</span>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Password" required>
+        <span id="togglePassword" class="eye-icon">👁️</span>
+      </div>
+      <label>
+        <input type="checkbox" id="rememberMe"> Remember Me
+      </label>
+      <button type="submit">Login</button>
+    </form>
+	   <!-- Add inside your existing login-box, below the login button -->
+<a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
+
+    <div class="message" id="messageBox"></div>
+  </div>
+		<!-- Forgot Password Box -->
+  <div class="login-box" id="forgotPasswordBox" style="display: none;">
+    <span class="close-btn" onclick="closeForgotPassword()">×</span>
+    <h2>Forgot Password</h2>
+    <form id="forgotPasswordForm">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required>
+      <button type="submit">Submit</button>
+    </form>
+    <div class="message" id="forgotMessageBox"></div>
+  </div>
+</div>
+
 
   <section id="about">
     <h2><i class="fa-solid fa-atom"></i>About Us</h2>
@@ -1489,16 +1518,138 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
- 
+ // DOM references
+  const loginBtn = document.getElementById("loginBtn");
+  const fixedLoginBtn = document.getElementById("fixedLoginBtn");
+  const loginModal = document.getElementById("loginModal");
+  const messageBox = document.getElementById("messageBox");
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+
+  // Predefined users
+  const users = [
+    { email: "durgeshpawar883@gmail.com", password: "dgp4912" },
+    { email: "abhijadhav555@gmail.com", password: "abhi1526" },
+    { email: "neetamore779@gmail.com", password: "neeta5716" }
+  ];
+
+  // Check if already logged in
+  const isLoggedIn =
+    localStorage.getItem("loggedIn") === "true" ||
+    sessionStorage.getItem("loggedIn") === "true";
+
+  if (isLoggedIn) {
+    window.location.href = "home.html";
+  }
+
+  // Open login modal (shared function)
+  function openLogin() {
+    loginModal.style.display = "flex";
+    messageBox.textContent = "";
+  }
+
+  // Close login modal
+  function closeLogin() {
+    loginModal.style.display = "none";
+    messageBox.textContent = "";
+  }
+
+  // Toggle password visibility
+  togglePassword.addEventListener("click", () => {
+    const isPassword = passwordInput.getAttribute("type") === "password";
+    passwordInput.setAttribute("type", isPassword ? "text" : "password");
+    togglePassword.textContent = isPassword ? "🙈" : "👁️";
+  });
+
+  // Assign open modal to both buttons
+  loginBtn.onclick = openLogin;
+  fixedLoginBtn.onclick = openLogin;
+
+  // Login form submission
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const remember = document.getElementById("rememberMe").checked;
+
+    const user = users.find(
+      user => user.email === email && user.password === password
+    );
+
+    if (user) {
+      // Store login state
+      if (remember) {
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userEmail", email);
+      } else {
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("userEmail", email);
+      }
+
+      messageBox.style.color = "green";
+      messageBox.textContent = "Login successful! Redirecting...";
+      setTimeout(() => {
+  if (email === "abhijadhav555@gmail.com") {
+    window.location.href = "student.html";
+  } else if (email === "neetamore779@gmail.com") {
+    window.location.href = "student02.html";
+  } else {
+    window.location.href = "home.html";
+  }
+}, 1000);
+    } else {
+      messageBox.style.color = "red";
+      messageBox.textContent = "Invalid email or password.";
+    }
+  });
+
+  // Close modal when clicking outside the box
+	document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
+  e.preventDefault();
+  document.querySelector(".login-box").style.display = "none";
+  document.getElementById("forgotPasswordBox").style.display = "block";
+});
+
+function closeForgotPassword() {
+  document.getElementById("forgotPasswordBox").style.display = "none";
+  document.querySelector(".login-box").style.display = "block";
+}
+
+
+
+document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const emailInput = document.getElementById("forgotEmail");
+  const email = emailInput.value;
+  const messageBox = document.getElementById("forgotMessageBox");
+
+  if (email.trim() === "") {
+    messageBox.innerText = "Please enter an email.";
+    messageBox.style.color = ""; // Default color
+  } else if (email === "durgeshpawar883@gmail.com" ||
+    email === "abhijadhav555@gmail.com" || email === "neetamore779@gmail.com") {
+    messageBox.innerText = "Password reset successful. Please check your email.";
+    messageBox.style.color = "green";
+    emailInput.value = "";
+
+    // Clear message after 3 seconds
+    setTimeout(() => {
+      messageBox.innerText = "";
+    }, 3000);
+  } else {
+    messageBox.innerText = "Email not registered";
+    messageBox.style.color = "red";
+    emailInput.value = ""; // ✅ Clear the input field
+     // ⏱️ Clear the message after 3 seconds
+    setTimeout(() => {
+      messageBox.innerText = "";
+    }, 3000);
+  }
+});
+
 	
 </script>
- 
- <!-- ✅ Load Auth0 SDK FIRST -->
-<script src="https://cdn.auth0.com/js/auth0-spa-js/1.25/auth0-spa-js.production.js"></script>
-
-<!-- ✅ Then load your auth.js AFTER the SDK is ready -->
-<script src="auth.js"></script>
-
 
 </body>
 </html>
