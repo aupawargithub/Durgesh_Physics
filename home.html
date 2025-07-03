@@ -442,18 +442,27 @@ header #welcome {
   }
     function toggleCard(header) {
     const content = header.nextElementSibling;
-    content.style.display = content.style.display === "none" ? "block" : "none";
-    header.innerHTML = header.innerHTML.includes('▾')
-      ? header.innerHTML.replace('▾', '▸')
-      : header.innerHTML.replace('▸', '▾');
+    const isHidden = content.style.display === "none";
+
+    // Toggle content visibility
+    content.style.display = isHidden ? "block" : "none";
+
+    // Change arrow direction
+    header.innerHTML = isHidden
+      ? header.innerHTML.replace('▸', '▾')
+      : header.innerHTML.replace('▾', '▸');
   }
 
-  // Collapse all cards by default on mobile
+  // Keep all cards expanded by default
   window.onload = () => {
-    const isMobile = window.innerWidth <= 600;
-    if (isMobile) {
-      document.querySelectorAll('.card-content').forEach(div => div.style.display = 'none');
-    }
+    document.querySelectorAll('.card-content').forEach(div => {
+      div.style.display = 'block'; // always expanded by default
+    });
+    document.querySelectorAll('.expandable-card h2').forEach(header => {
+      if (!header.innerHTML.includes('▾')) {
+        header.innerHTML += ' ▾';
+      }
+    });
   };
   </script>
 </body>
