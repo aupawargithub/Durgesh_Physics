@@ -1,3 +1,5 @@
+
+let auth0; // ✅ Declare the variable
 const config = {
   domain: "dev-7mt23fot8tx0n0ug.us.auth0.com",
   client_id: "GHGUu4PxLHtzcFotqc5NhfCuq4GOyeBh",
