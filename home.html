@@ -279,18 +279,21 @@ header #welcome {
 }
     .card button {
   float: right;
-  background-color: #3498db;
+  background: linear-gradient(135deg, #4e8ef7, #1e6ce3);
   color: white;
   border: none;
   border-radius: 6px;
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth animation */
 }
 
 .card button:hover {
-  background-color: #2c80b4;
+ background: linear-gradient(135deg, #1e6ce3, #1558c4);
+   transform: translateY(-2px); /* subtle lift */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* stronger shadow */
 }
 
   </style>
