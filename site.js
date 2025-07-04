@@ -151,13 +151,27 @@ const swiper = new Swiper(".myHeroSwiper", {
   ];
 
   // Check if already logged in
-  const isLoggedIn =
-    localStorage.getItem("loggedIn") === "true" ||
-    sessionStorage.getItem("loggedIn") === "true";
+   const isLoggedIn =
+  localStorage.getItem("loggedIn") === "true" ||
+  sessionStorage.getItem("loggedIn") === "true";
 
-  if (isLoggedIn) {
+const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
+const role = localStorage.getItem("role") || sessionStorage.getItem("role");
+
+// ✅ Only redirect if NOT coming from back button (dashboard)
+const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
+
+if (isLoggedIn && !cameFromDashboard) {
+  if (role === "admin") {
     window.location.href = "home.html";
+  } else if (userEmail === "abhijadhav555@gmail.com") {
+    window.location.href = "student.html";
+  } else if (userEmail === "neetamore779@gmail.com") {
+    window.location.href = "student02.html";
   }
+}
+
+
 
   // Open login modal (shared function)
   function openLogin() {
@@ -199,26 +213,29 @@ const swiper = new Swiper(".myHeroSwiper", {
     );
 
     if (user) {
-      // Store login state
-      if (remember) {
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("userEmail", email);
-      } else {
-        sessionStorage.setItem("loggedIn", "true");
-        sessionStorage.setItem("userEmail", email);
-      }
+  const isAdmin = email === "durgeshpawar883@gmail.com";
+  const isStudent1 = email === "abhijadhav555@gmail.com";
+  const isStudent2 = email === "neetamore779@gmail.com";
 
-      messageBox.style.color = "green";
-      messageBox.textContent = "Login successful! Redirecting...";
-      setTimeout(() => {
-  if (email === "abhijadhav555@gmail.com") {
-    window.location.href = "student.html";
-  } else if (email === "neetamore779@gmail.com") {
-    window.location.href = "student02.html";
-  } else {
-    window.location.href = "home.html";
-  }
-}, 1000);
+  const storage = remember ? localStorage : sessionStorage;
+  storage.setItem("loggedIn", "true");
+  storage.setItem("userEmail", email);
+  storage.setItem("role", isAdmin ? "admin" : "student");
+
+  messageBox.style.color = "green";
+  messageBox.textContent = "Login successful! Redirecting...";
+
+  setTimeout(() => {
+    if (isStudent1) {
+      window.location.href = "student.html";
+    } else if (isStudent2) {
+      window.location.href = "student02.html";
+    } else {
+      window.location.href = "home.html";
+    }
+  }, 1000);
+
+
     } else {
       messageBox.style.color = "red";
       messageBox.textContent = "Invalid email or password.";
@@ -268,4 +285,3 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", functio
     }, 3000);
   }
 });
-
