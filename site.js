@@ -172,11 +172,15 @@ const swiper = new Swiper(".myHeroSwiper", {
   }
 
   // Toggle password visibility
-  togglePassword.addEventListener("click", () => {
+ togglePassword.addEventListener("click", () => {
     const isPassword = passwordInput.getAttribute("type") === "password";
     passwordInput.setAttribute("type", isPassword ? "text" : "password");
-    togglePassword.textContent = isPassword ? "🙈" : "👁️";
+
+    // Toggle the icon class
+    togglePassword.classList.toggle("fa-eye");
+    togglePassword.classList.toggle("fa-eye-slash");
   });
+
 
   // Assign open modal to both buttons
   loginBtn.onclick = openLogin;
