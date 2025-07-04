@@ -353,20 +353,94 @@ header #welcome {
   <p id="popupText">Uploading file...</p>
 </div>
 
-   <!-- 📚 Course & Batch Management -->
+<!-- 📚 Academic Content & Test Management -->
+<div class="card">
+  <h2>Academic Content & Test Management</h2>
+  <ul>
+    <li><strong>Subject Content Uploaded:</strong></li>
+    <li>• Physics – 45 Lectures, 12 Notes, 3 Assignments</li>
+  </ul>
+
+  <ul style="margin-top: 20px;">
+    <li><strong>Upcoming Tests:</strong></li>
+    <li>📝 Weekly Test – 7th July (Sunday)</li>
+    <li>🧪 Mock NEET – 15th July</li>
+    <li>🧠 JEE Advanced Practice Test – 18th July</li>
+    <li>📊 Unit Test (Physics) – 22nd July</li>
+  </ul>
+</div>
+<div class="card">
+  <h2>Class Schedule</h2>
+  <ul style="padding: 0; margin: 0;">
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Mon</strong>
+      <span>JEE/NEET</span>
+      <span>10 AM – 12 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Tue</strong>
+      <span>HSC Board</span>
+      <span>10 AM – 12 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Wed</strong>
+      <span>JEE/NEET</span>
+      <span>2 PM – 4 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Thu</strong>
+      <span>JEE/NEET</span>
+      <span>10 AM – 12 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Fri</strong>
+      <span>SSC & HSC</span>
+      <span>11 AM – 4 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Sat</strong>
+      <span>JEE/NEET</span>
+      <span>10 AM – 12 PM</span>
+    </li>
+    <li style="display: grid; grid-template-columns: 80px 1fr 120px; padding: 6px 0;">
+      <strong>Sun</strong>
+      <span>Test</span>
+      <span>10 AM – 12 PM</span>
+    </li>
+  </ul>
+</div>
+
+
+<!-- 📢 Important Academic Notices -->
+<div class="card">
+  <h2>Important Academic Notices</h2>
+  <ul>
+    <li>📢 New JEE/NEET Batch Starts – 28th July</li>
+    <li>📢 HSC Board Batch Starts – From 24th July</li>
+    <li>📢 Q/A Doubt Clearing – 21st July</li>
+    
+    <li>📢 Timetable Update – Every Friday</li>
+    <li>📢 Fee Payment Deadline – 26th July</li>
+  
+  </ul>
+</div>
+
+
+    <!-- 📚 Course & Batch Management -->
 <div class="card expandable-card">
   <h2 onclick="toggleCard(this)">Course & Batch Management ▾</h2>
   <div class="card-content">
     <ul>
       <li>Add/Edit Courses <button onclick="alert('Add Course')">Add</button></li>
-      <li>Assign Subjects <button onclick="alert('Assign Subject')">Assign</button></li>
+       <li>Add/Edit Standard <button onclick="alert('Add Course')">Add</button></li>
+  
       <li>Create Batches <button onclick="alert('Create Batch')">Create</button></li>
       <li>Set Timetable <button onclick="alert('Set Timetable')">Set</button></li>
     </ul>
   </div>
 </div>
 
-<!-- 🧪 Test & Exam Management -->
+<!-- 🧪 Test Management -->
 <div class="card expandable-card">
   <h2 onclick="toggleCard(this)">Test & Exam Management ▾</h2>
   <div class="card-content">
@@ -375,7 +449,7 @@ header #welcome {
       <li>MCQ Auto Evaluation <button onclick="alert('Evaluate MCQ')">Evaluate</button></li>
       <li>Manual Mark Entry <button onclick="alert('Enter Marks')">Enter</button></li>
       <li>Generate Rank List <button onclick="alert('Generate Rank')">Generate</button></li>
-      <li>View Reports <button onclick="alert('View Reports')">View</button></li>
+      
     </ul>
   </div>
 </div>
@@ -385,14 +459,15 @@ header #welcome {
   <h2 onclick="toggleCard(this)">Communication Tools ▾</h2>
   <div class="card-content">
     <ul>
+      <li>Auto Alerts for Fee<button onclick="alert('Send SMS')">Send</button></li>
       <li>Send SMS <button onclick="alert('Send SMS')">Send</button></li>
       <li>WhatsApp Notice <button onclick="alert('Send WhatsApp')">Send</button></li>
       <li>Email Circular <button onclick="alert('Send Email')">Send</button></li>
       <li>Batch Announcements <button onclick="alert('Announce')">Announce</button></li>
-      <li>Auto Alerts for Absentees <button onclick="alert('Auto Alert')">Enable</button></li>
     </ul>
   </div>
 </div>
+
 
 
   <script>
