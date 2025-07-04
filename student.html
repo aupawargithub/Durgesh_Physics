@@ -303,6 +303,12 @@
   </div>
 
   <script>
+    // 🔁 Force browser to not use back-forward cache
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    window.location.reload(); // force reload if coming from back/forward cache
+  }
+});
     // Mark that we're on dashboard so going back is traceable
 sessionStorage.setItem("visitedFromDashboard", "true");
   // 🔒 Check login status and redirect if not logged in
