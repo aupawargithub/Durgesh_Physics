@@ -161,7 +161,7 @@ const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 // ✅ Only redirect if NOT coming from back button (dashboard)
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
 
-if (isLoggedIn && !cameFromDashboard) {
+if (isLoggedIn && !sessionStorage.getItem("visitedFromDashboard")) {
   if (role === "admin") {
     window.location.href = "home.html";
   } else if (userEmail === "abhijadhav555@gmail.com") {
