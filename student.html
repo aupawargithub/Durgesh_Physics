@@ -303,6 +303,8 @@
   </div>
 
   <script>
+    // Mark that we're on dashboard so going back is traceable
+sessionStorage.setItem("visitedFromDashboard", "true");
   // 🔒 Check login status and redirect if not logged in
   const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
   const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
@@ -324,11 +326,17 @@
   }
 
   // 🔁 Universal logout function (also can be used in HTML: onclick="logout()")
-  function logout() {
+   function logout() {
     localStorage.removeItem("loggedIn");
-    sessionStorage.removeItem("loggedIn");
-    localStorage.removeItem("userEmail");
-    sessionStorage.removeItem("userEmail");
+localStorage.removeItem("userEmail");
+localStorage.removeItem("role");
+sessionStorage.removeItem("loggedIn");
+sessionStorage.removeItem("userEmail");
+sessionStorage.removeItem("role");
+sessionStorage.removeItem("visitedFromDashboard");
+sessionStorage.removeItem("role");
+
+
     window.location.href = "index.html";
   }
     function loadProfileImage(event) {
