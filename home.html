@@ -498,7 +498,8 @@ sessionStorage.setItem("visitedFromDashboard", "true");
   sessionStorage.removeItem("visitedFromDashboard");
       
 
-     window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
+     // 🔁 Go back in browser history — this avoids creating a new entry
+  window.history.back();
 
     });
 
