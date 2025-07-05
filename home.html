@@ -482,24 +482,23 @@ sessionStorage.setItem("visitedFromDashboard", "true");
     const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
     if (!isLoggedIn) {
-     window.location.replace("./");
+    window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
 
     } else {
       document.getElementById("welcome").innerText = `Logged in as admin: ${userEmail}`;
     }
 
   document.getElementById("logoutBtn").addEventListener("click", () => {
-     localStorage.removeItem("loggedIn");
-localStorage.removeItem("userEmail");
-localStorage.removeItem("role");
-sessionStorage.removeItem("loggedIn");
-sessionStorage.removeItem("userEmail");
-sessionStorage.removeItem("role");
-sessionStorage.removeItem("visitedFromDashboard");
-sessionStorage.removeItem("role");
+    localStorage.removeItem("loggedIn");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("role");
+  sessionStorage.removeItem("loggedIn");
+  sessionStorage.removeItem("userEmail");
+  sessionStorage.removeItem("role");
+  sessionStorage.removeItem("visitedFromDashboard");
       
 
-     window.location.replace("./");
+     window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
 
     });
 
