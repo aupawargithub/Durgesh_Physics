@@ -482,7 +482,7 @@ sessionStorage.setItem("visitedFromDashboard", "true");
     const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
     if (!isLoggedIn) {
-     window.location.replace("index.html");
+     window.location.replace("./");
 
     } else {
       document.getElementById("welcome").innerText = `Logged in as admin: ${userEmail}`;
@@ -499,7 +499,7 @@ sessionStorage.removeItem("visitedFromDashboard");
 sessionStorage.removeItem("role");
       
 
-     window.location.replace("index.html");
+     window.location.replace("./");
 
     });
 
