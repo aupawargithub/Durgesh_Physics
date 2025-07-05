@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-store" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
   <title>DURGESH PHYSICS CLASSES - Student Dashboard</title>
   <link rel="icon" type="image/png" href="logoo.png">
   <style>
@@ -315,7 +319,8 @@ sessionStorage.setItem("visitedFromDashboard", "true");
   const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
   if (!isLoggedIn) {
-    window.location.href = "index.html";  // Redirect to index page
+    window.location.replace("index.html");
+  // Redirect to index page
   } else {
     // 👋 Set welcome message
     const welcomeText = document.getElementById("welcome");
