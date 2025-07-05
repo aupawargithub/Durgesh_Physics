@@ -291,3 +291,10 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", functio
     }, 3000);
   }
 });
+window.addEventListener("pageshow", function (event) {
+  const isHistoryNav = event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward";
+  if (isHistoryNav) {
+    window.location.reload(); // force a fresh reload if navigated via back button
+  }
+});
+
