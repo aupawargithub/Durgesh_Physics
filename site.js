@@ -1,9 +1,4 @@
- // 🔁 Force reload if browser returns to index.html from cache
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-    window.location.reload();
-  }
-});
+
   // Register Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
