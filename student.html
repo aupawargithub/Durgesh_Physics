@@ -320,7 +320,7 @@ sessionStorage.setItem("visitedFromDashboard", "true");
   const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
   if (!isLoggedIn) {
-   window.location.replace("./");
+  window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
   // Redirect to index page
   } else {
     // 👋 Set welcome message
@@ -339,16 +339,16 @@ sessionStorage.setItem("visitedFromDashboard", "true");
   // 🔁 Universal logout function (also can be used in HTML: onclick="logout()")
    function logout() {
     localStorage.removeItem("loggedIn");
-localStorage.removeItem("userEmail");
-localStorage.removeItem("role");
-sessionStorage.removeItem("loggedIn");
-sessionStorage.removeItem("userEmail");
-sessionStorage.removeItem("role");
-sessionStorage.removeItem("visitedFromDashboard");
-sessionStorage.removeItem("role");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("role");
+
+  sessionStorage.removeItem("loggedIn");
+  sessionStorage.removeItem("userEmail");
+  sessionStorage.removeItem("role");
+  sessionStorage.removeItem("visitedFromDashboard");
 
 
-   window.location.replace("./");
+   window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
 
   }
     function loadProfileImage(event) {
