@@ -320,7 +320,7 @@ sessionStorage.setItem("visitedFromDashboard", "true");
   const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
   if (!isLoggedIn) {
-   window.location.replace("index.html");
+   window.location.replace("./");
   // Redirect to index page
   } else {
     // 👋 Set welcome message
@@ -348,7 +348,7 @@ sessionStorage.removeItem("visitedFromDashboard");
 sessionStorage.removeItem("role");
 
 
-   window.location.replace("index.html");
+   window.location.replace("./");
 
   }
     function loadProfileImage(event) {
