@@ -475,12 +475,7 @@ header #welcome {
 
 
   <script>
-    // 🔁 Force browser to not use back-forward cache
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    window.location.reload(); // force reload if coming from back/forward cache
-  }
-});
+  
     // Mark that we're on dashboard so going back is traceable
 sessionStorage.setItem("visitedFromDashboard", "true");
     const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
