@@ -1,4 +1,9 @@
-
+ // 🔁 Force reload if browser returns to index.html from cache
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+    window.location.reload();
+  }
+});
   // Register Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -161,7 +166,8 @@ const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 // ✅ Only redirect if NOT coming from back button (dashboard)
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
 
-if (isLoggedIn && !sessionStorage.getItem("visitedFromDashboard")) {
+if (isLoggedIn && !cameFromDashboard) {
+sessionStorage.removeItem("visitedFromDashboard"); // ✅ clear it
   if (role === "admin") {
     window.location.href = "home.html";
   } else if (userEmail === "abhijadhav555@gmail.com") {
