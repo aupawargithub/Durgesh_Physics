@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
   <title>Durgesh Physics Classes - Admin Dashboard</title>
   <link rel="icon" type="image/png" sizes="32x32" href="logoo.png">
   <link rel="apple-touch-icon" href="logoo.png">
@@ -483,7 +487,8 @@ sessionStorage.setItem("visitedFromDashboard", "true");
     const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
     if (!isLoggedIn) {
-      window.location.href = "index.html";
+     window.location.replace("index.html");
+
     } else {
       document.getElementById("welcome").innerText = `Logged in as admin: ${userEmail}`;
     }
