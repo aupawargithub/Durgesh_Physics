@@ -487,12 +487,15 @@ window.addEventListener("pageshow", (event) => {
 sessionStorage.setItem("visitedFromDashboard", "true");
 
 // ✅ Login check
-const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+const isLoggedIn =
+  localStorage.getItem("loggedIn") === "true" ||
+  sessionStorage.getItem("loggedIn") === "true";
+
 const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
 if (!isLoggedIn) {
-  // ❌ Redirect if not logged in
-  window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
+  // ❌ Not logged in, redirect
+  window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
 } else {
   // 👋 Show welcome message
   const welcome = document.getElementById("welcome");
@@ -503,20 +506,15 @@ if (!isLoggedIn) {
 
 // 🔓 Logout logic
 document.getElementById("logoutBtn").addEventListener("click", () => {
-  // 🧹 Clear everything
+  // 🧹 Clear all storage
   localStorage.clear();
   sessionStorage.clear();
 
-  // 🔙 Go back to index.html (existing session)
-  history.go(-1);
-
-  // ⏱️ Fallback: If still on home.html, force redirect
-  setTimeout(() => {
-    if (window.location.pathname.includes("home.html")) {
-      window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
-    }
-  }, 500);
+  // ✅ Replace current page with index.html (no new history entry)
+  history.replaceState(null, "", "https://aupawargithub.github.io/Durgesh_Physics/");
+  location.reload(); // force refresh the index.html that now replaced this one
 });
+
 
      function simulateUpload() {
     const popup = document.getElementById('uploadPopup');
