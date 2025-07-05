@@ -1,0 +1,24 @@
+<!-- logout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logging Out...</title>
+  <script>
+    // Clear all session/local storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Replace browser history to prevent going back into dashboard
+    history.replaceState(null, "", "https://www.google.com");
+
+    // Redirect to your index page
+    setTimeout(() => {
+      window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
+    }, 100); // wait a moment to allow history replacement
+  </script>
+</head>
+<body>
+  <p>Logging out... Please wait.</p>
+</body>
+</html>
