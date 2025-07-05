@@ -489,18 +489,8 @@ sessionStorage.setItem("visitedFromDashboard", "true");
     }
 
   document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("loggedIn");
-  localStorage.removeItem("userEmail");
-  localStorage.removeItem("role");
-  sessionStorage.removeItem("loggedIn");
-  sessionStorage.removeItem("userEmail");
-  sessionStorage.removeItem("role");
-  sessionStorage.removeItem("visitedFromDashboard");
-      
-
-     window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
-
-    });
+  window.location.href = "logout.html"; // ✅ Redirect to cleaner logout flow
+});
 
      function simulateUpload() {
     const popup = document.getElementById('uploadPopup');
