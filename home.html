@@ -503,18 +503,18 @@ if (!isLoggedIn) {
   }
 }
 
-// 🔓 Logout button logic
-const logoutBtn = document.getElementById("logoutBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", () => {
-    // Clear session and localStorage
-    localStorage.clear();
-    sessionStorage.clear();
+logoutBtn.addEventListener("click", () => {
+  // Clear auth info
+  localStorage.clear();
+  sessionStorage.clear();
 
-    // ✅ Go back to previous index.html (existing one)
-    history.go(-1);
-  });
-}
+  // Set marker to skip login redirect logic in index.html
+  sessionStorage.setItem("loggedOut", "true");
+
+  // Go back to previous page (index.html)
+  history.back();
+});
+
 
 
      function simulateUpload() {
