@@ -306,52 +306,49 @@
   </div>
 
   <script>
-    // 🔁 Force browser to not use back-forward cache
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    window.location.reload(); // force reload if coming from back/forward cache
+    // 🔁 Force reload if browser uses back-forward cache
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+    window.location.reload();
   }
 });
-    // Mark that we're on dashboard so going back is traceable
+
+// ✅ Mark that we're on dashboard
 sessionStorage.setItem("visitedFromDashboard", "true");
-  // 🔒 Check login status and redirect if not logged in
-  const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
-  const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
-  if (!isLoggedIn) {
-     window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
+// ✅ Login check
+const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
+const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 
-  // Redirect to index page
-  } else {
-    // 👋 Set welcome message
-    const welcomeText = document.getElementById("welcome");
-    if (welcomeText) {
-      welcomeText.innerText = `Logged in as admin: ${userEmail}`;
+// ❌ Redirect if not logged in or role is not student
+if (!isLoggedIn || role !== "student") {
+  window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
+} else {
+  // 👋 Show welcome message
+  const welcome = document.getElementById("welcome");
+  if (welcome) {
+    welcome.innerText = `Logged in as student: ${userEmail}`;
+  }
+}
+
+// 🔓 Logout logic
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  // 🧹 Clear everything
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // 🔙 Go back to index.html (existing session)
+  history.go(-1);
+
+  // ⏱️ Fallback: If still on student02.html, force redirect
+  setTimeout(() => {
+    if (window.location.pathname.includes("student02.html")) {
+      window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
     }
-  }
+  }, 500);
+});
 
-  // 🔓 Logout button event (if using event listener)
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", logout);
-  }
-
-  // 🔁 Universal logout function (also can be used in HTML: onclick="logout()")
-   function logout() {
-    localStorage.removeItem("loggedIn");
-  localStorage.removeItem("userEmail");
-  localStorage.removeItem("role");
-
-  sessionStorage.removeItem("loggedIn");
-  sessionStorage.removeItem("userEmail");
-  sessionStorage.removeItem("role");
-  sessionStorage.removeItem("visitedFromDashboard");
-
-
-    window.location.replace("https://aupawargithub.github.io/Durgesh_Physics/");
-
-
-  }
     function loadProfileImage(event) {
     const image = document.getElementById('profilePic');
     image.src = URL.createObjectURL(event.target.files[0]);
