@@ -323,7 +323,8 @@ const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("u
 const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 
 // ❌ Redirect if not logged in or role is not student
-if (!isLoggedIn || role !== "student") {
+if (!isLoggedIn || (role !== "student" && role !== "admin")){
+
   window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
 } else {
   // 👋 Show welcome message
