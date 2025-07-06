@@ -307,7 +307,7 @@
   </div>
 
   <script>
-  // 🔁 Force reload if browser uses back-forward cache
+ // 🔁 Force reload if browser uses back-forward cache
 window.addEventListener("pageshow", (event) => {
   if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
     window.location.reload();
@@ -322,7 +322,7 @@ const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage
 const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 
-// ❌ Redirect if not logged in or role is not student
+// ❌ Redirect if not logged in or not a student
 if (!isLoggedIn || role !== "student") {
   window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
 } else {
@@ -339,16 +339,20 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.clear();
   sessionStorage.clear();
 
+  // ✅ Set flag to prevent index.html auto-redirect
+  sessionStorage.setItem("loggedOut", "true");
+
   // 🔙 Go back to index.html (existing session)
   history.go(-1);
 
-  // ⏱️ Fallback: If still on student.html, force redirect
+  // ⏱️ Fallback: If still stuck on student.html, force redirect
   setTimeout(() => {
     if (window.location.pathname.includes("student.html")) {
       window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
     }
   }, 500);
 });
+
 
     function loadProfileImage(event) {
     const image = document.getElementById('profilePic');
