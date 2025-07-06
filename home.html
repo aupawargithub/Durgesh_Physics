@@ -503,17 +503,18 @@ if (!isLoggedIn) {
   }
 }
 
-logoutBtn.addEventListener("click", () => {
-  // Clear auth info
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  // 🧹 Clear session and auth info
   localStorage.clear();
   sessionStorage.clear();
 
-  // Set marker to skip login redirect logic in index.html
+  // ✅ Set marker to prevent auto-login
   sessionStorage.setItem("loggedOut", "true");
 
-  // Go back to previous page (index.html)
-  history.back();
+  // 🔁 Do NOT use history.back(); use direct redirect
+  window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
 });
+
 
 
 
