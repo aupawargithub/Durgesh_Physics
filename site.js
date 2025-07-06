@@ -161,8 +161,13 @@ const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 // ✅ Only redirect if NOT coming from back button (dashboard)
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
 
-if (isLoggedIn && !cameFromDashboard) {
-sessionStorage.removeItem("visitedFromDashboard"); // ✅ clear it
+
+// ✅ Check if user recently logged out
+const loggedOut = sessionStorage.getItem("loggedOut") === "true";
+
+if (isLoggedIn && !cameFromDashboard && !loggedOut) {
+  // ✅ Clear the dashboard visit tracker
+  sessionStorage.removeItem("visitedFromDashboard");
   if (role === "admin") {
     window.location.href = "home.html";
   } else if (userEmail === "abhijadhav555@gmail.com") {
@@ -173,6 +178,8 @@ sessionStorage.removeItem("visitedFromDashboard"); // ✅ clear it
 }
 
 
+// ✅ After handling, always clean up logout flag
+sessionStorage.removeItem("loggedOut");
 
   // Open login modal (shared function)
   function openLogin() {
