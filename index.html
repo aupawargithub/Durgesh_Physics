@@ -944,7 +944,19 @@ font-weight: 200;
       text-align: center;
       margin-bottom: 20px;
     }
+.login-logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  width: 80px;              /* Smaller size */
+  height: 80px;             /* Fixed height for round shape */
+  border-radius: 12px;      /* Curved edges */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  object-fit: cover;        /* Ensures image doesn't distort */
+  //background-color: white;  /* Optional: for transparency-friendly logos */
+ // padding: 5px;             /* Optional: gives spacing inside */
+}
 
+	  
     .login-box input[type="email"],
     .login-box input[type="password"] {
       width: 100%;
@@ -1084,7 +1096,7 @@ font-weight: 200;
 	<div id="loginModal">
   <div class="login-box">
     <span class="close-btn" onclick="closeLogin()">×</span>
-    <h2>Login</h2>
+   <img src="durgesh_logo.png" alt="Durgesh Physics Logo" class="login-logo"> <!-- ✅ Logo inserted here -->
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required>
       <div class="password-container">
