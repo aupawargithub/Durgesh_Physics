@@ -953,7 +953,11 @@ font-weight: 200;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus {
+  border: 1px solid #007BFF; /* blue border on focus */
+  outline: none; /* remove default outline */
+}
     .login-box label {
       font-size: 14px;
       display: flex;
