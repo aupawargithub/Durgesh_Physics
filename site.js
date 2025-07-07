@@ -1,12 +1,12 @@
 
-  // Register Service Worker
+  
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(reg => console.log('Service Worker registered', reg))
       .catch(err => console.error('Service Worker failed', err));
   }
 
-   // Toggle menu for mobile nav
+ 
 function toggleMenu(source = 'main') {
   const navLinks = document.getElementById("navLinks");
   const toggleMain = document.getElementById("menuToggle");
@@ -135,7 +135,7 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
- // DOM references
+
   const loginBtn = document.getElementById("loginBtn");
   const fixedLoginBtn = document.getElementById("fixedLoginBtn");
   const loginModal = document.getElementById("loginModal");
@@ -143,14 +143,14 @@ const swiper = new Swiper(".myHeroSwiper", {
   const togglePassword = document.getElementById("togglePassword");
   const passwordInput = document.getElementById("password");
 
-  // Predefined users
+
   const users = [
     { email: "durgeshpawar883@gmail.com", password: "dgp4912" },
     { email: "abhijadhav555@gmail.com", password: "abhi1526" },
     { email: "neetamore779@gmail.com", password: "neeta5716" }
   ];
 
-  // Check if already logged in
+ 
    const isLoggedIn =
   localStorage.getItem("loggedIn") === "true" ||
   sessionStorage.getItem("loggedIn") === "true";
@@ -158,7 +158,7 @@ const swiper = new Swiper(".myHeroSwiper", {
 const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 
-// ✅ Only redirect if NOT coming from back button (dashboard)
+
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
 
 
@@ -178,22 +178,22 @@ if (isLoggedIn && !cameFromDashboard && !loggedOut) {
 }
 
 
-// ✅ After handling, always clean up logout flag
+
 sessionStorage.removeItem("loggedOut");
 
-  // Open login modal (shared function)
+ 
   function openLogin() {
     loginModal.style.display = "flex";
     messageBox.textContent = "";
   }
 
-  // Close login modal
+
   function closeLogin() {
     loginModal.style.display = "none";
     messageBox.textContent = "";
   }
 
-  // Toggle password visibility
+ 
  togglePassword.addEventListener("click", () => {
     const isPassword = passwordInput.getAttribute("type") === "password";
     passwordInput.setAttribute("type", isPassword ? "text" : "password");
@@ -204,7 +204,7 @@ sessionStorage.removeItem("loggedOut");
   });
 
 
-  // Assign open modal to both buttons
+  
   loginBtn.onclick = openLogin;
   fixedLoginBtn.onclick = openLogin;
 
@@ -250,7 +250,7 @@ sessionStorage.removeItem("loggedOut");
     }
   });
 
-  // Close modal when clicking outside the box
+ 
 	document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
   e.preventDefault();
   document.querySelector(".login-box").style.display = "none";
@@ -299,4 +299,25 @@ window.addEventListener("pageshow", function (event) {
     window.location.reload(); // force a fresh reload if navigated via back button
   }
 });
+
+(function () {
+  const loginBox = document.querySelector('.login-box');
+  if (!loginBox) return;
+
+  const inputs = loginBox.querySelectorAll('input');
+
+  inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+      if (window.innerWidth <= 768) {
+        loginBox.style.transform = 'translateY(-20%)';
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      if (window.innerWidth <= 768) {
+        loginBox.style.transform = 'translateY(0)';
+      }
+    });
+  });
+})();
 
