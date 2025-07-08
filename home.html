@@ -46,10 +46,10 @@ html, body {
 // border-bottom-left-radius: 10px;
  // border-bottom-right-radius: 10px;
   color: #fff;
-     position: relative; /* Needed for absolute positioning */
+     position: relative; 
 }
 
-/* Title Styling */
+
 header h1 {
   margin: 0;
   font-size: 1.6rem;
@@ -64,10 +64,10 @@ header h1 .main-title {
 
 header h1 .subheading {
   font-size: 1rem;
-  color: #e0f7fa; /* lighter blue */
+  color: #e0f7fa; 
 }
 
-/* Welcome & User Info Styling */
+
 header .user-info,
 header #welcome {
   font-size: 0.9rem;
@@ -95,7 +95,7 @@ header #welcome {
       transform: translateY(-2px);
     }
 
-    /* Main dashboard layout */
+   
 .dashboard {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -111,11 +111,11 @@ header #welcome {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth animation */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 }
     .card:hover {
-  transform: translateY(-4px); /* subtle lift */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* stronger shadow */
+  transform: translateY(-4px); 
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); 
 }
 .card h2 {
       margin-top: 0;
@@ -145,13 +145,13 @@ header #welcome {
     
 .student-grid {
   display: grid;
- grid-template-columns: auto 1fr auto; /* Added third column */
+ grid-template-columns: auto 1fr auto; 
   gap: 10px 16px;
   margin-top: 12px;
 }
 
 .student {
-  display: contents; /* Keeps grid layout without wrapper box */
+  display: contents; 
 }
 
 .roll {
@@ -234,13 +234,13 @@ header #welcome {
   transition: opacity 0.3s ease;
 }
 
-/* Fade-in */
+
 .popup.show {
   display: block;
   opacity: 1;
 }
 
-/* Spinner animation */
+
 .spinner {
   width: 30px;
   height: 30px;
@@ -251,7 +251,7 @@ header #welcome {
   animation: spin 1s linear infinite;
 }
 
-/* Spinner keyframes */
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -262,7 +262,7 @@ header #welcome {
     flex-direction: column;
     align-items: flex-start;
     min-height: 160px;
-    padding-bottom: 60px; /* ✅ add space for the logout button */
+    padding-bottom: 60px; 
   }
 
   #logoutBtn {
@@ -291,19 +291,19 @@ header #welcome {
   font-size: 14px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* smooth animation */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 .card button:hover {
  background: linear-gradient(135deg, #1e6ce3, #1558c4);
    transform: translateY(-2px); /* subtle lift */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* stronger shadow */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); 
 }
 .expandable-card h2 {
   cursor: pointer;
    user-select: none; 
-   outline: none;            /* removes focus outline */
-  -webkit-tap-highlight-color: transparent; /* removes mobile tap flash */
+   outline: none;           
+  -webkit-tap-highlight-color: transparent; 
 }
   </style>
 </head>
@@ -343,7 +343,7 @@ header #welcome {
   </div>
 </div>
 
-    <!-- Upload Study Material -->
+   
     <div class="card upload-section">
       <h2>Upload Study Material</h2>
        <input type="file" id="fileInput" />
@@ -351,13 +351,13 @@ header #welcome {
 
     </div>
 
- <!-- Modern Upload Popup -->
+ 
 <div id="uploadPopup" class="popup">
   <div class="spinner"></div>
   <p id="popupText">Uploading file...</p>
 </div>
 
-<!-- 📚 Academic Content & Test Management -->
+
 <div class="card">
   <h2>Academic Content & Test Management</h2>
   <ul>
@@ -415,7 +415,7 @@ header #welcome {
 </div>
 
 
-<!-- 📢 Important Academic Notices -->
+
 <div class="card">
   <h2>Important Academic Notices</h2>
   <ul>
@@ -430,7 +430,7 @@ header #welcome {
 </div>
 
 
-    <!-- 📚 Course & Batch Management -->
+   
 <div class="card expandable-card">
   <h2 onclick="toggleCard(this)">Course & Batch Management ▾</h2>
   <div class="card-content">
@@ -444,7 +444,7 @@ header #welcome {
   </div>
 </div>
 
-<!-- 🧪 Test Management -->
+
 <div class="card expandable-card">
   <h2 onclick="toggleCard(this)">Test & Exam Management ▾</h2>
   <div class="card-content">
@@ -458,7 +458,7 @@ header #welcome {
   </div>
 </div>
 
-<!-- 📢 Communication Tools -->
+
 <div class="card expandable-card">
   <h2 onclick="toggleCard(this)">Communication Tools ▾</h2>
   <div class="card-content">
@@ -478,41 +478,41 @@ header #welcome {
   
 <script>
 
-  // 🔁 Force reload if browser uses back-forward cache
+ 
 window.addEventListener("pageshow", (event) => {
   if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
     window.location.reload();
   }
 });
 
-// ✅ Mark that we're on dashboard
+
 sessionStorage.setItem("visitedFromDashboard", "true");
 
-// ✅ Login check
+
 const isLoggedIn = localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
 const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 
 if (!isLoggedIn) {
-  // ❌ Redirect if not logged in
+  
   window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
 } else {
-  // 👋 Show welcome message
+  
   const welcome = document.getElementById("welcome");
   if (welcome) {
     welcome.innerText = `Logged in as admin: ${userEmail}`;
   }
 }
 
-// 🔓 Logout logic
+
 document.getElementById("logoutBtn").addEventListener("click", () => {
-  // 🧹 Clear everything
+ 
   localStorage.clear();
   sessionStorage.clear();
 
-  // 🔙 Go back to index.html (existing session)
+  
   history.go(-1);
 
-  // ⏱️ Fallback: If still on home.html, force redirect
+  
   setTimeout(() => {
     if (window.location.pathname.includes("home.html")) {
       window.location.href = "https://aupawargithub.github.io/Durgesh_Physics/";
@@ -529,13 +529,13 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     const popupText = document.getElementById('popupText');
     const fileInput = document.getElementById('fileInput');
 
-    // ✅ Check if file is selected
+    
     if (!fileInput.files || fileInput.files.length === 0) {
       alert("Please select a file before uploading.");
       return;
     }
 
-    // Show popup and begin uploading
+    
     popup.style.display = 'block';
     popupText.textContent = "Uploading file...";
 
@@ -560,19 +560,19 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     const content = header.nextElementSibling;
     const isHidden = content.style.display === "none";
 
-    // Toggle content visibility
+    
     content.style.display = isHidden ? "block" : "none";
 
-    // Change arrow direction
+    
     header.innerHTML = isHidden
       ? header.innerHTML.replace('▸', '▾')
       : header.innerHTML.replace('▾', '▸');
   }
 
-  // Keep all cards expanded by default
+ 
   window.onload = () => {
     document.querySelectorAll('.card-content').forEach(div => {
-      div.style.display = 'block'; // always expanded by default
+      div.style.display = 'block'; 
     });
     document.querySelectorAll('.expandable-card h2').forEach(header => {
       if (!header.innerHTML.includes('▾')) {
