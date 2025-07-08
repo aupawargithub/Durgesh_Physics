@@ -24,48 +24,39 @@
     }
 
 .header {
-   background: linear-gradient(to right, #283593, #64b5f6);
+  background: linear-gradient(to right, #283593, #64b5f6);
   color: white;
-  padding: 24px;
-  
+  padding: 40px 24px 70px;
+  text-align: center;
+  position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.header-main {
+.header-text h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.header-text p {
+  font-size: 16px;
+  opacity: 0.95;
+  margin: 6px 0 16px; /* <-- Adds space below subtitle */
+}
+
+.header-footer {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  right: 24px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.header-text {
-  flex: 1;
-  min-width: 200px;
-  margin-bottom: 20px;
-}
-
-.header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.header p {
-  font-size: 16px;
-  opacity: 0.95;
-  margin: 4px 0 0;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-
 .header-user-box p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #e0f7fa;
   margin: 0;
@@ -80,41 +71,45 @@
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
-  box-shadow: var(--shadow-md);
+   box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      outline: none;
-  -webkit-tap-highlight-color: transparent;
+  outline: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 .logout-btn:hover {
   background-color: #b71c1c;
- transform: translateY(-2px);
-   box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+ box-shadow: var(--shadow-lg);
 }
 
+/* Mobile responsiveness */
 @media (max-width: 600px) {
-  .header-main {
-    flex-direction: column;
-    align-items: flex-start;
+  .header {
+    padding: 32px 16px 80px;
   }
 
   .header-text h1 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .header-text p {
     font-size: 14px;
+    margin-bottom: 24px; /* <-- Give more space in mobile */
   }
 
-  .header-controls {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 12px;
+  .header-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    left: 16px;
+    right: 16px;
   }
 
   .logout-btn {
-    padding: 8px 14px;
+    align-self: flex-end;
     font-size: 14px;
+    padding: 8px 14px;
   }
 }
 
@@ -297,17 +292,16 @@
 <body>
 
   <div class="header">
-  <div class="header-main">
-    <div class="header-text">
-      <h1>DURGESH PHYSICS CLASSES</h1>
-      <p>Student Dashboard</p>
+  <div class="header-text">
+    <h1>DURGESH PHYSICS CLASSES</h1>
+    <p>Student Dashboard</p>
+  </div>
+
+  <div class="header-footer">
+    <div class="header-user-box">
+      <p id="welcome">Logged in as student: neeta...</p>
     </div>
-    <div class="header-controls">
-      <div class="header-user-box">
-        <p id="welcome">Welcome, Student</p>
-      </div>
-      <button class="logout-btn" id="logoutBtn">Logout</button>
-    </div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 </div>
 
