@@ -25,7 +25,7 @@
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
 
-<!-- Swiper JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <style>
     * {
@@ -97,10 +97,10 @@ flex-wrap: nowrap;
 	white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;   
-  margin-left: 20px; /* 👈 Move subtitle 100px to the right */  
+  margin-left: 20px; 
     }
 
-/* Compact Header Styling */
+
 .compact-header {
   position: fixed;
   top: 0;
@@ -112,11 +112,11 @@ flex-wrap: nowrap;
   align-items: center;
   padding: 10px 20px;
   opacity: 0;
-	padding-right: 60px; /* ✅ Reserve space for toggle here too */
+	padding-right: 60px; 
   pointer-events: none;
   transition: opacity 0.3s ease;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Bottom edge shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
 }
 
 .compact-header.visible {
@@ -129,8 +129,8 @@ flex-wrap: nowrap;
       height: 40px;
       border-radius: 8px;
 margin-right: 13px;
-  width: auto; /* maintain aspect ratio */
-  object-fit: contain; /* prevent clipping */
+  width: auto; 
+  object-fit: contain; 
 }
 
 .compact-title {
@@ -180,27 +180,27 @@ margin-right: 13px;
     }
 
 
-/* Sticky nav under compact header only on desktop */
+
 @media (min-width: 769px) {
   .compact-header.visible + #nav-wrapper nav {
     position: fixed;
-    top: 60px; /* Adjust based on your .compact-header height */
+    top: 60px; 
     left: 0;
     right: 0;
     z-index: 998;
-    background: linear-gradient(to right, #283593, #64b5f6); /* Match header */
+    background: linear-gradient(to right, #283593, #64b5f6); 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   }
 
-  /* Prevent content jump due to fixed nav */
+ 
   .compact-header.visible + #nav-wrapper::after {
     content: "";
     display: block;
-    height: 45px; /* Equal to nav height */
+    height: 45px; 
   }
  #nav-wrapper {
     position: relative;
-    z-index: 1000; /* between compact-header and full-header */
+    z-index: 1000; 
   }
 
   nav {
@@ -213,15 +213,15 @@ margin-right: 13px;
 @media (min-width: 769px) {
   nav {
     position: relative;
-    z-index: 1000; /* Only apply z-index on desktop */
+    z-index: 1000; 
   }
 }
 	  
 .swiper {
-	 position: relative; /* ✅ Add this */
+	 position: relative; 
     width: auto;
     aspect-ratio: 16/9;
-     // border-top: 1px solid #616161; /* light gray separator line */
+     // border-top: 1px solid #616161; 
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -231,11 +231,11 @@ margin-right: 13px;
     background-position: center;
   }
 
-/* Desktop: fixed height, keep width auto */
+
 @media (min-width: 769px) {
   .swiper {
     aspect-ratio: unset;
-    height: 500px;  /* Example fixed height, adjust as needed */
+    height: 500px;  
     width: auto;
     max-width: 100%;
   }
@@ -246,14 +246,14 @@ margin-right: 13px;
       height: auto;
     }
   }
-/* Position pagination dots below the swiper */
+
 .swiper-pagination {
   text-align: center;
   margin-top: 12px;
-  position: relative; /* Important to keep it below, not on top */
+  position: relative; 
 }
 
-/* Style the dots */
+
 .swiper-pagination-bullet {
   background-color: grey;
   opacity: 1;
@@ -263,14 +263,14 @@ margin-right: 13px;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #333; /* darker when active */
+  background-color: #333; 
 }
 
 	  
 .menu-toggle {
   position: absolute;
   top: 50%;  
-transform: translateY(-50%);  /* Adjust from center */
+transform: translateY(-50%);  
   right: 15px;
   width: 30px;
   height: 30px;
@@ -278,9 +278,9 @@ transform: translateY(-50%);  /* Adjust from center */
   z-index: 1000;
 	outline: none;
   -webkit-tap-highlight-color: transparent;
-	//border: 1px solid white;   /* 👈 Add this for the border */
- // border-radius: 4px;        /* Optional: small rounded corners */
- // box-sizing: border-box;    /* Ensures padding/border stays within 30x30 */
+	//border: 1px solid white;   
+ // border-radius: 4px;        
+ // box-sizing: border-box;   
 }
 
 .menu-toggle div {
@@ -293,12 +293,12 @@ transform: translateY(-50%);  /* Adjust from center */
   left: 2px;
 }
 
-/* Position individual bars */
+
 .menu-toggle div:nth-child(1) { top: 6px; }
 .menu-toggle div:nth-child(2) { top: 13.5px; }
 .menu-toggle div:nth-child(3) { top: 21px; }
 
-/* Cross transform */
+
 .menu-toggle.open div:nth-child(1) {
   transform: rotate(45deg);
   top: 13.5px;
@@ -312,7 +312,7 @@ transform: translateY(-50%);  /* Adjust from center */
   transform: rotate(-45deg);
   top: 13.5px;
 }
-    /* === Navigation Base === */
+   
 .nav-links {
   
   flex-direction: row;
@@ -321,15 +321,15 @@ transform: translateY(-50%);  /* Adjust from center */
   flex-wrap: wrap;
 }
 
-/* === Mobile View (≤ 767px) === */
+
 @media (max-width: 767px) {
   .menu-toggle {
     display: block;
   }
 
     .nav-links {
-position: absolute; /* ✅ Position under header */
-    top: 100%; /* ✅ Directly below header */
+position: absolute; 
+    top: 100%; 
 
     right: 0;
     width: 100%;
@@ -342,7 +342,7 @@ position: absolute; /* ✅ Position under header */
     z-index: 999;
 	      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 border-radius: 0 0 12px 12px;
-	    transform: scaleY(0); /* Hide initially */
+	    transform: scaleY(0); 
 transform-origin: top;
   opacity: 0;
   visibility: hidden;
@@ -356,16 +356,16 @@ margin: 9px 0;
   padding: 8px 20px; 
   font-weight: 600;
   transition: color 0.3s;
-border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
- width: 100%;                /* make link take full width */
-  max-width: 300px;           /* optional: max width to avoid super wide */
-  box-sizing: border-box;     /* include padding in width */
-  text-align: center;         /* center text inside link */
+border-bottom: 1px solid #cfd8dc; 
+ width: 100%;                
+  max-width: 300px;          
+  box-sizing: border-box;    
+  text-align: center;         
 
 }
 
   .nav-links.active {
-      transform: scaleY(1);  /* Show on active */
+      transform: scaleY(1);  
   opacity: 1;
   visibility: visible;
   }
@@ -406,7 +406,7 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
     display: flex;
   }
 }
-/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+
 @media (max-width: 768px) {
   header,
   .compact-header {
@@ -439,7 +439,7 @@ border-bottom: 1px solid #cfd8dc; /* 👈 Light gray separator line */
     flex-shrink: 0;
   }
 }
-/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+
 @media (max-width: 360px) {
   header,
   .compact-header {
@@ -475,7 +475,7 @@ font-size: 15px;
     flex-shrink: 0;
   }
 }
-/* ✅ RESPONSIVE BREAKPOINTS FOR SMALL SCREENS */
+
 @media (max-width: 375px) {
   header,
   .compact-header {
@@ -527,10 +527,10 @@ font-size: 15px;
       max-width: 1000px;
       margin: auto;
       padding: 30px 20px;
-scroll-margin-top: 60px; /* or whatever height your compact header is */
+scroll-margin-top: 60px; 
     }
 	  section > *:not(:last-child) {
-  margin-bottom: 14px; /* uniform spacing between child elements */
+  margin-bottom: 14px; 
 }
 
 
@@ -644,7 +644,7 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   top: 0;
   left: -1px;
   width: calc(100% + 2px);
-  height: 3px; /* Adjust to 10px for thick or 2–3px for thin line */
+  height: 3px; 
   background: linear-gradient(to right, #007bff, #ffa000);
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
@@ -699,7 +699,7 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       flex-direction: column;
       gap: 16px;
     }
-/* Thin top gradient line */
+
 .info-box::before,
 .testimonial::before,
 form::before,
@@ -709,13 +709,13 @@ form::before,
   top: 0;
   left: -1px;
   width: calc(100% + 2px);
-  height: 3px; /* thinner than 10px */
+  height: 3px; 
   background: linear-gradient(to right, #007bff, #ffa000);
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
 }
 
-/* Anchor the line correctly */
+
 .info-box,
 .testimonial,
 form,
@@ -764,13 +764,13 @@ form,
       margin-top: 15px;
 	    
 	    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px); /* very subtle lift */
+  transform: translateY(-2px); 
     }
 .scroll-to-top {
   position: fixed;
-  bottom: 90px; /* Adjust to avoid overlap with WhatsApp */
+  bottom: 90px; 
   right: 20px;
-  background-color: #444; /* Dark gray color */
+  background-color: #444; 
   color: #fff;
   font-size: 24px;
   width: 50px;
@@ -780,7 +780,7 @@ form,
   border-radius: 50%;
   text-decoration: none;
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  display: none; /* Hidden initially */
+  display: none; 
   z-index: 1000;
     transition: all 0.3s ease;
 	outline: none;
@@ -867,18 +867,18 @@ flex-direction: column;
         height: 50px;
       }
     }
-	  /* Prevent scroll chaining from nav to body */
+	 
 #navLinks.prevent-scroll {
   touch-action: none;
   overscroll-behavior: contain;
-  overflow-y: auto; /* allow scrolling inside nav if content overflows */
-  max-height: 80vh;  /* optional: limit height */
+  overflow-y: auto; 
+  max-height: 80vh;  
 }
  #loginBtn {
         position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 10000; /* 👁️ Ensures it stays above swiper */
+  z-index: 10000; 
   padding: 10px 20px;
   background-color: #6f42c1;
   color: white;
@@ -895,7 +895,7 @@ font-weight: 200;
     }
     
 #loginBtn:hover {
-  background-color: #5a34a1; /* Darker purple */
+  background-color: #5a34a1; 
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -938,8 +938,8 @@ font-weight: 200;
   height: 3px;
   width: 100%;
   background: linear-gradient(to right, #007bff, #ffa000);
- border-top-left-radius: 8px;   /* ✅ match .login-box radius */
-  border-top-right-radius: 8px;  /* ✅ match .login-box radius */
+ border-top-left-radius: 8px;   
+  border-top-right-radius: 8px;  
 }
     .login-box h2 {
       text-align: center;
@@ -948,13 +948,13 @@ font-weight: 200;
 .login-logo {
   display: block;
   margin: 0 auto 20px auto;
-  width: 70px;              /* Smaller size */
-  height: 70px;             /* Fixed height for round shape */
-  border-radius: 12px;      /* Curved edges */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
-  object-fit: cover;        /* Ensures image doesn't distort */
-  //background-color: white;  /* Optional: for transparency-friendly logos */
- // padding: 5px;             /* Optional: gives spacing inside */
+  width: 70px;              
+  height: 70px;             
+  border-radius: 12px;      
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  object-fit: cover;        
+  //background-color: white;  
+ // padding: 5px;             
 }
 
 	  
@@ -968,8 +968,8 @@ font-weight: 200;
     }
 .login-box input[type="email"]:focus,
 .login-box input[type="password"]:focus {
-  border: 1px solid #007BFF; /* blue border on focus */
-  outline: none; /* remove default outline */
+  border: 1px solid #007BFF; 
+  outline: none; 
 }
     .login-box label {
       font-size: 14px;
@@ -1013,7 +1013,7 @@ font-weight: 200;
 
 .password-container input {
   width: 100%;
-  padding-right: 40px; /* space for eye icon */
+  padding-right: 40px; 
 }
 
 .eye-icon {
@@ -1078,9 +1078,9 @@ font-weight: 200;
     </div>
   </nav>
 </div>		
-<!-- Place this in the <head> or before your section -->
 
-<!-- Swiper -->
+
+
 <div class="swiper myHeroSwiper">
 	<button id="loginBtn">Login</button>
   <div class="swiper-wrapper">
@@ -1091,13 +1091,13 @@ font-weight: 200;
     <div class="swiper-slide" style="background-image: url('durgesh_02.png')"></div>
   </div>
 </div>
-<!-- Pagination goes here -->
+
 <div class="swiper-pagination"></div>
 	
 	<div id="loginModal">
   <div class="login-box">
     <span class="close-btn" onclick="closeLogin()">×</span>
-   <img src="Login_logo.png" alt="Durgesh Physics Logo" class="login-logo"> <!-- ✅ Logo inserted here -->
+   <img src="Login_logo.png" alt="Durgesh Physics Logo" class="login-logo"> 
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required>
       <div class="password-container">
@@ -1109,12 +1109,12 @@ font-weight: 200;
       </label>
       <button type="submit">Login</button>
     </form>
-	   <!-- Add inside your existing login-box, below the login button -->
+	   
 <a href="#" id="forgotPasswordLink" style="display:block; text-align:center; margin-top:10px; color:#007BFF; text-decoration:none;">Forgot Password?</a>
 
     <div class="message" id="messageBox"></div>
   </div>
-		<!-- Forgot Password Box -->
+		
   <div class="login-box" id="forgotPasswordBox" style="display: none;">
     <span class="close-btn" onclick="closeForgotPassword()">×</span>
     <h2>Forgot Password</h2>
@@ -1314,13 +1314,13 @@ font-weight: 200;
     <div class="answer">A: Because acceleration due to gravity is the same for all objects near Earth, ignoring air resistance.</div>
   </div>
 
-  <!-- Sample Q&A 2 -->
+ 
  <div class="info-box" style="background: #E4ECFC;">
      <div class="question" style="font-weight: bold;">Q: Why does light bend when it passes from air into water?</div>
     <div class="answer">A: Light bends because it changes speed in different mediums (refraction).</div>
   </div>
 
-  <!-- Ask a Question Form -->
+
   
     <input type="text" name="name" placeholder="Your Name" required />
     <textarea name="question" rows="4" placeholder="Ask your question..." required></textarea>
@@ -1379,7 +1379,7 @@ font-weight: 200;
 </a>
 
 
-  <!-- WhatsApp Button -->
+ 
   <div class="whatsapp-float">
     <a href="https://wa.me/917499668944" target="_blank" title="Chat on WhatsApp">
       <img src="https://img.icons8.com/color/96/000000/whatsapp--v1.png" alt="WhatsApp">
