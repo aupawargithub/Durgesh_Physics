@@ -48,14 +48,14 @@ function toggleMenu(source = 'main') {
   }
 }
 
-// Close nav menu when a link is clicked
+
 document.querySelectorAll('#navLinks a').forEach(link => {
   link.addEventListener('click', () => {
     const navLinks = document.getElementById("navLinks");
     const toggleMain = document.getElementById("menuToggle");
     const toggleCompact = document.getElementById("menuToggleCompact");
 
-    navLinks.classList.remove("active", "prevent-scroll"); // ✅ Remove scroll lock
+    navLinks.classList.remove("active", "prevent-scroll"); 
     navLinks.classList.add("mobile-hidden");
     navLinks.style.top = '';
     navLinks.style.position = '';
@@ -162,11 +162,11 @@ const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
 
 
-// ✅ Check if user recently logged out
+
 const loggedOut = sessionStorage.getItem("loggedOut") === "true";
 
 if (isLoggedIn && !cameFromDashboard && !loggedOut) {
-  // ✅ Clear the dashboard visit tracker
+ 
   sessionStorage.removeItem("visitedFromDashboard");
   if (role === "admin") {
     window.location.href = "home.html";
@@ -279,15 +279,15 @@ document.getElementById("forgotPasswordForm").addEventListener("submit", functio
     messageBox.style.color = "green";
     emailInput.value = "";
 
-    // Clear message after 3 seconds
+    
     setTimeout(() => {
       messageBox.innerText = "";
     }, 3000);
   } else {
     messageBox.innerText = "Email not registered";
     messageBox.style.color = "red";
-    emailInput.value = ""; // ✅ Clear the input field
-     // ⏱️ Clear the message after 3 seconds
+    emailInput.value = ""; 
+    
     setTimeout(() => {
       messageBox.innerText = "";
     }, 3000);
