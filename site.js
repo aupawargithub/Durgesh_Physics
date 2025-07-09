@@ -205,8 +205,18 @@ sessionStorage.removeItem("loggedOut");
 
 
   
-  loginBtn.onclick = openLogin;
-  fixedLoginBtn.onclick = openLogin;
+ function showSpinnerThenLogin() {
+  const loader = document.getElementById("fullscreenLoader");
+  loader.classList.add("active");
+
+  setTimeout(() => {
+    loader.classList.remove("active");
+    openLogin(); // Existing function to show modal
+  }, 500); // 1-second loading delay
+}
+
+ loginBtn.onclick = showSpinnerThenLogin;
+fixedLoginBtn.onclick = showSpinnerThenLogin;
 
   // Login form submission
   document.getElementById("loginForm").addEventListener("submit", function (e) {
