@@ -68,18 +68,22 @@ document.querySelectorAll('#navLinks a').forEach(link => {
 function handleContactForm(event) {
     event.preventDefault();
 
-    // Show the toast
-    const toast = document.getElementById("toast");
-    toast.style.display = "block";
+     const toast = document.getElementById("toast");
 
-    // Hide after 3 seconds
-    setTimeout(() => {
-      toast.style.display = "none";
-    }, 3000);
+  
+  toast.style.display = "block";
+  toast.classList.remove("fade-active");
+  void toast.offsetWidth; // Trigger reflow
+  toast.classList.add("fade-active");
 
-    // Optionally clear form
-    event.target.reset();
-  }
+  
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
+
+  
+  event.target.reset();
+}
  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
   window.addEventListener("scroll", () => {
