@@ -63,20 +63,48 @@ document.querySelectorAll('#navLinks a').forEach(link => {
 });
 
 function handleContactForm(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-     const toast = document.getElementById("toast");
+  const form = event.target;
 
-   toast.style.display = "block";
+  // Check for any visible required input, textarea, or hidden input
+  const requiredFields = form.querySelectorAll('input[required], textarea[required], select[required]');
+  let isValid = true;
+
+  requiredFields.forEach(field => {
+    if (field.type === "hidden" || field.offsetParent !== null) {
+      if (!field.value.trim()) {
+        isValid = false;
+        field.classList.add("input-error"); 
+      } else {
+        field.classList.remove("input-error");
+      }
+    }
+  });
+
+  if (!isValid) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  const toast = document.getElementById("toast");
+  toast.style.display = "block";
   toast.classList.remove("fade-active");
-  void toast.offsetWidth; // Trigger reflow
+  void toast.offsetWidth;
   toast.classList.add("fade-active");
 
-    setTimeout(() => {
+  setTimeout(() => {
     toast.style.display = "none";
   }, 3000);
 
-    event.target.reset();
+  form.reset();
+
+  form.querySelectorAll('.custom-select .selected').forEach(sel => {
+    sel.textContent = sel.getAttribute("data-default");
+  });
+  form.querySelectorAll('.custom-select input[type="hidden"]').forEach(input => {
+    input.value = '';
+  });
 }
  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
@@ -306,4 +334,34 @@ window.addEventListener("pageshow", function (event) {
     });
   });
 })();
+
+function toggleDropdown(selectEl) {
+  // Close all other dropdowns
+  const allSelects = document.querySelectorAll('.custom-select');
+  allSelects.forEach(el => {
+    if (el !== selectEl) el.classList.remove('active');
+  });
+
+  selectEl.classList.toggle('active');
+}
+
+function selectItem(li, event) {
+  event.stopPropagation(); 
+  const customSelect = li.closest('.custom-select');
+  const selected = customSelect.querySelector('.selected');
+  const hiddenInput = customSelect.querySelector('input[type="hidden"]');
+
+  selected.textContent = li.textContent;
+  hiddenInput.value = li.textContent;
+ customSelect.classList.remove('active');
+}
+
+document.addEventListener('click', function (e) {
+  document.querySelectorAll('.custom-select').forEach(drop => {
+    if (!drop.contains(e.target)) {
+      drop.classList.remove('active');
+    }
+  });
+});
+
 
