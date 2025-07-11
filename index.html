@@ -736,6 +736,99 @@ form,
       border-color: #42a5f5;
       outline: none;
     }
+.custom-select {
+  position: relative;
+  width: 100%;
+  border: 1px solid #ccc;
+   height: 52px; 
+  border-radius: 10px;
+  background: #f9f9f9;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.custom-select .selected {
+  padding: 14px;
+  padding-right: 40px;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.custom-select .selected::after {
+  content: "▼";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #888;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+
+.custom-select.active .selected::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.custom-select .dropdown-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  max-height: 0;
+  opacity: 0;
+  overflow-y: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.custom-select.active .dropdown-list {
+  max-height: 200px;
+  opacity: 1;
+  overflow-y: auto;
+  transform: translateY(0); 
+}
+
+
+.custom-select .dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-select .dropdown-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+
+.custom-select .dropdown-list li {
+  padding: 8px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background 0.25s ease, color 0.25s ease;
+  line-height: 1.2;
+}
+
+.custom-select .dropdown-list li:last-child {
+  border-bottom: none;
+}
+
+.custom-select .dropdown-list li:hover {
+  background: #e3f2fd; 
+  color: #1976d2;       
+}
+
+#register form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
     button {
       padding: 14px;
@@ -1410,7 +1503,31 @@ font-weight: 200;
   title="Please enter exactly 10 digits" 
 >
 
-      <input name="entry.2233445566" type="text" placeholder="Class (9th, 10th, etc)" required>
+    
+<div class="custom-select" onclick="toggleDropdown(this)">
+  <div class="selected" data-default="Select Your Class">Select Your Class</div>
+  <ul class="dropdown-list">
+    <li onclick="selectItem(this, event)">9th</li>
+    <li onclick="selectItem(this, event)">10th</li>
+    <li onclick="selectItem(this, event)">11th</li>
+    <li onclick="selectItem(this, event)">12th</li>
+  </ul>
+  <input type="hidden" name="entry.class" required>
+</div>
+
+
+<div class="custom-select" onclick="toggleDropdown(this)">
+  <div class="selected" data-default="Select Your Course">Select Your Course</div>
+  <ul class="dropdown-list">
+    <li onclick="selectItem(this, event)">Maharashtra State Board</li>
+    <li onclick="selectItem(this, event)">CBSE</li>
+    <li onclick="selectItem(this, event)">JEE</li>
+    <li onclick="selectItem(this, event)">NEET</li>
+  </ul>
+  <input type="hidden" name="entry.course" required>
+</div>
+
+
       <button type="submit">Submit</button>
     </form>
   </section>
