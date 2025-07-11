@@ -6,8 +6,7 @@
       .catch(err => console.error('Service Worker failed', err));
   }
 
- 
-function toggleMenu(source = 'main') {
+ function toggleMenu(source = 'main') {
   const navLinks = document.getElementById("navLinks");
   const toggleMain = document.getElementById("menuToggle");
   const toggleCompact = document.getElementById("menuToggleCompact");
@@ -47,8 +46,6 @@ function toggleMenu(source = 'main') {
     navLinks.classList.remove("prevent-scroll");
   }
 }
-
-
 document.querySelectorAll('#navLinks a').forEach(link => {
   link.addEventListener('click', () => {
     const navLinks = document.getElementById("navLinks");
@@ -70,19 +67,16 @@ function handleContactForm(event) {
 
      const toast = document.getElementById("toast");
 
-  
-  toast.style.display = "block";
+   toast.style.display = "block";
   toast.classList.remove("fade-active");
   void toast.offsetWidth; // Trigger reflow
   toast.classList.add("fade-active");
 
-  
-  setTimeout(() => {
+    setTimeout(() => {
     toast.style.display = "none";
   }, 3000);
 
-  
-  event.target.reset();
+    event.target.reset();
 }
  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
@@ -139,33 +133,24 @@ const swiper = new Swiper(".myHeroSwiper", {
     clickable: true,
   },
 });
-
-  const loginBtn = document.getElementById("loginBtn");
+const loginBtn = document.getElementById("loginBtn");
   const fixedLoginBtn = document.getElementById("fixedLoginBtn");
   const loginModal = document.getElementById("loginModal");
   const messageBox = document.getElementById("messageBox");
   const togglePassword = document.getElementById("togglePassword");
   const passwordInput = document.getElementById("password");
-
-
-  const users = [
+const users = [
     { email: "durgeshpawar883@gmail.com", password: "dgp4912" },
     { email: "abhijadhav555@gmail.com", password: "abhi1526" },
     { email: "neetamore779@gmail.com", password: "neeta5716" }
   ];
-
- 
-   const isLoggedIn =
+ const isLoggedIn =
   localStorage.getItem("loggedIn") === "true" ||
   sessionStorage.getItem("loggedIn") === "true";
-
 const userEmail = localStorage.getItem("userEmail") || sessionStorage.getItem("userEmail");
 const role = localStorage.getItem("role") || sessionStorage.getItem("role");
 
-
 const cameFromDashboard = sessionStorage.getItem("visitedFromDashboard") === "true";
-
-
 
 const loggedOut = sessionStorage.getItem("loggedOut") === "true";
 
@@ -180,25 +165,18 @@ if (isLoggedIn && !cameFromDashboard && !loggedOut) {
     window.location.href = "student02.html";
   }
 }
-
-
-
 sessionStorage.removeItem("loggedOut");
 
- 
-  function openLogin() {
+ function openLogin() {
     loginModal.style.display = "flex";
     messageBox.textContent = "";
   }
 
-
-  function closeLogin() {
+function closeLogin() {
     loginModal.style.display = "none";
     messageBox.textContent = "";
   }
-
- 
- togglePassword.addEventListener("click", () => {
+togglePassword.addEventListener("click", () => {
     const isPassword = passwordInput.getAttribute("type") === "password";
     passwordInput.setAttribute("type", isPassword ? "text" : "password");
 
@@ -207,8 +185,6 @@ sessionStorage.removeItem("loggedOut");
     togglePassword.classList.toggle("fa-eye-slash");
   });
 
-
-  
  function showSpinnerThenLogin() {
   const loader = document.getElementById("fullscreenLoader");
   loader.classList.add("active");
@@ -257,15 +233,13 @@ fixedLoginBtn.onclick = showSpinnerThenLogin;
     }
   }, 1000);
 
-
-    } else {
+ } else {
       messageBox.style.color = "red";
       messageBox.textContent = "Invalid email or password.";
     }
   });
 
- 
-	document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
+ document.getElementById("forgotPasswordLink").addEventListener("click", function (e) {
   e.preventDefault();
   document.querySelector(".login-box").style.display = "none";
   document.getElementById("forgotPasswordBox").style.display = "block";
@@ -275,8 +249,6 @@ function closeForgotPassword() {
   document.getElementById("forgotPasswordBox").style.display = "none";
   document.querySelector(".login-box").style.display = "block";
 }
-
-
 
 document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
   e.preventDefault();
