@@ -740,20 +740,24 @@ form,
   position: relative;
   width: 100%;
   border: 1px solid #ccc;
-   padding: 10px;
+  padding: 10px;
   border-radius: 10px;
   background: #f9f9f9;
   font-size: 16px;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: none;
+  outline: none;
 }
 
+
 .custom-select .selected {
- 
   padding-right: 40px;
   position: relative;
-  transition: background 0.3s ease;
+  color: #888; /* gray placeholder */
+  transition: background 0.3s ease, color 0.3s ease;
 }
+
 
 .custom-select .selected::after {
   content: "▼";
@@ -768,9 +772,38 @@ form,
 }
 
 
+.custom-select:not(.has-value) .selected {
+  color: #888;
+}
+
+
+.custom-select.has-value .selected {
+  color: #000;
+  background-color: #e3f2fd; 
+}
+
+
+.custom-select.has-value {
+ 
+  background-color: #e3f2fd;
+}
+
+
+.custom-select.active {
+  border-color: #90caf9;
+}
+
+
 .custom-select.active .selected::after {
   transform: translateY(-50%) rotate(180deg);
 }
+
+
+.custom-select:focus,
+.custom-select .selected:focus {
+  outline: none !important;
+}
+
 
 .custom-select .dropdown-list {
   position: absolute;
@@ -788,6 +821,7 @@ form,
   transition: all 0.3s ease;
   z-index: 10;
 }
+
 
 .custom-select.active .dropdown-list {
   max-height: 100px;
@@ -819,10 +853,12 @@ form,
   border-bottom: none;
 }
 
+
 .custom-select .dropdown-list li:hover {
-  background: #e3f2fd; 
-  color: #1976d2;       
+  background: #e3f2fd;
+  color: #1976d2;
 }
+
 
 #register form {
   display: flex;
