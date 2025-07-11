@@ -67,7 +67,6 @@ function handleContactForm(event) {
 
   const form = event.target;
 
-  // Check for any visible required input, textarea, or hidden input
   const requiredFields = form.querySelectorAll('input[required], textarea[required], select[required]');
   let isValid = true;
 
@@ -99,11 +98,12 @@ function handleContactForm(event) {
 
   form.reset();
 
-  form.querySelectorAll('.custom-select .selected').forEach(sel => {
-    sel.textContent = sel.getAttribute("data-default");
-  });
-  form.querySelectorAll('.custom-select input[type="hidden"]').forEach(input => {
-    input.value = '';
+  form.querySelectorAll('.custom-select').forEach(select => {
+    const selected = select.querySelector('.selected');
+    const hiddenInput = select.querySelector('input[type="hidden"]');
+    selected.textContent = selected.getAttribute("data-default");
+    hiddenInput.value = '';
+    select.classList.remove('has-value'); // Remove color class
   });
 }
  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
@@ -125,12 +125,11 @@ function handleContactForm(event) {
   });
 	document.querySelectorAll('#courses .tab-item').forEach(tab => {
     tab.addEventListener('click', () => {
-      // deactivate all tabs
+      
       document.querySelectorAll('#courses .tab-item').forEach(t => t.classList.remove('active'));
-      // hide all panels
+      
       document.querySelectorAll('#courses .content-panel').forEach(p => p.classList.remove('active'));
 
-      // activate clicked tab
       tab.classList.add('active');
       // show its panel
       document.getElementById(tab.dataset.target).classList.add('active');
@@ -145,7 +144,7 @@ window.addEventListener("scroll", () => {
     fullHeader.style.display = "none";
   } else {
     compactHeader.classList.remove("visible");
-    fullHeader.style.display = "flex"; // use flex because original header uses flex layout
+    fullHeader.style.display = "flex"; 
   }
 });
 const swiper = new Swiper(".myHeroSwiper", {
@@ -334,7 +333,6 @@ window.addEventListener("pageshow", function (event) {
     });
   });
 })();
-
 function toggleDropdown(selectEl) {
   // Close all other dropdowns
   const allSelects = document.querySelectorAll('.custom-select');
@@ -353,7 +351,26 @@ function selectItem(li, event) {
 
   selected.textContent = li.textContent;
   hiddenInput.value = li.textContent;
- customSelect.classList.remove('active');
+  customSelect.classList.remove('active');
+
+  const defaultText = selected.getAttribute('data-default');
+  if (li.textContent !== defaultText) {
+    customSelect.classList.add('has-value');
+  } else {
+    customSelect.classList.remove('has-value');
+  }
+}
+
+function resetCustomSelects() {
+  document.querySelectorAll('.custom-select').forEach(select => {
+    const selected = select.querySelector('.selected');
+    const hiddenInput = select.querySelector('input[type="hidden"]');
+    const defaultText = selected.getAttribute('data-default');
+
+    selected.textContent = defaultText;
+    hiddenInput.value = '';
+    select.classList.remove('has-value');
+  });
 }
 
 document.addEventListener('click', function (e) {
@@ -363,5 +380,4 @@ document.addEventListener('click', function (e) {
     }
   });
 });
-
 
