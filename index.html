@@ -734,7 +734,8 @@ form,
 
     input:focus, textarea:focus {
       border-color: #42a5f5;
-      outline: none;
+     outline: none;
+  -webkit-tap-highlight-color: transparent;
     }
 .custom-select {
   position: relative;
@@ -747,7 +748,8 @@ form,
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   box-shadow: none;
-  outline: none;
+ outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -779,13 +781,13 @@ form,
 
 .custom-select.has-value .selected {
   color: #000;
-  background-color: #e3f2fd; 
+  background-color: #e6f0ff;
 }
 
 
 .custom-select.has-value {
  
-  background-color: #e3f2fd;
+  background-color: #e6f0ff;
 }
 
 
@@ -801,7 +803,8 @@ form,
 
 .custom-select:focus,
 .custom-select .selected:focus {
-  outline: none !important;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
