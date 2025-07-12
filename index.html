@@ -838,7 +838,7 @@ form,
   width: 6px;
 }
 .custom-select .dropdown-list::-webkit-scrollbar-thumb {
-  background: #ccc;
+ background-color: #bbb;
   border-radius: 10px;
 }
 
@@ -847,6 +847,7 @@ form,
   padding: 8px 14px;
   font-size: 15px;
   cursor: pointer;
+	 color: #333;
   border-bottom: 1px solid #eee;
   transition: background 0.25s ease, color 0.25s ease;
   line-height: 1.2;
@@ -859,7 +860,7 @@ form,
 
 .custom-select .dropdown-list li:hover {
   background: #e3f2fd;
-  color: #1976d2;
+  color: #1565c0;
 }
 
 
@@ -868,7 +869,11 @@ form,
   flex-direction: column;
   gap: 15px;
 }
-
+.input-error {
+  color: red !important;
+  border-color: red !important;
+  font-weight: normal;
+}
     button {
       padding: 14px;
       background: #1e88e5;
@@ -1540,6 +1545,7 @@ font-weight: 200;
     <li onclick="selectItem(this, event)">12th</li>
   </ul>
   <input type="hidden" name="entry.class" required>
+		  <div class="error-message" style="display: none; color: red; font-size: 14px;">Please select your class</div>
 </div>
 
 
@@ -1552,6 +1558,7 @@ font-weight: 200;
     <li onclick="selectItem(this, event)">NEET</li>
   </ul>
   <input type="hidden" name="entry.course" required>
+	<div class="error-message" style="display: none; color: red; font-size: 14px;">Please select your course</div>
 </div>
       <input name="entry.0987654321" type="email" placeholder="Your Email" required>
       <input 
