@@ -71,19 +71,36 @@ function handleContactForm(event) {
   let isValid = true;
 
   requiredFields.forEach(field => {
-    if (field.type === "hidden" || field.offsetParent !== null) {
-      if (!field.value.trim()) {
-        isValid = false;
-        field.classList.add("input-error"); 
-      } else {
-        field.classList.remove("input-error");
+    const isHiddenInput = field.type === "hidden" || field.readOnly;
+    const parent = field.closest('.custom-select');
+
+    if (!field.value.trim()) {
+      isValid = false;
+      field.classList.add("input-error");
+
+      // For custom dropdowns: show message inside the visible element
+      if (isHiddenInput && parent) {
+        const selected = parent.querySelector('.selected');
+        selected.classList.add("input-error");
+
+        const labelType = field.name.includes("class") ? "class" : "course";
+        selected.textContent = `Please select your ${labelType}`;
+      }
+    } else {
+      field.classList.remove("input-error");
+
+      if (isHiddenInput && parent) {
+        const selected = parent.querySelector('.selected');
+        selected.classList.remove("input-error");
+
+        // Restore selected label if input is valid
+        selected.textContent = field.value;
       }
     }
   });
 
   if (!isValid) {
-    alert("Please fill in all required fields.");
-    return;
+    return; // prevent submission
   }
 
   const toast = document.getElementById("toast");
@@ -97,15 +114,21 @@ function handleContactForm(event) {
   }, 3000);
 
   form.reset();
-
-  form.querySelectorAll('.custom-select').forEach(select => {
+ form.querySelectorAll('.custom-select').forEach(select => {
     const selected = select.querySelector('.selected');
     const hiddenInput = select.querySelector('input[type="hidden"]');
+
     selected.textContent = selected.getAttribute("data-default");
+    selected.classList.remove("input-error");
+
     hiddenInput.value = '';
-    select.classList.remove('has-value'); // Remove color class
+    hiddenInput.classList.remove("input-error");
+
+    select.classList.remove('has-value');
   });
 }
+
+
  const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
   window.addEventListener("scroll", () => {
@@ -334,7 +357,7 @@ window.addEventListener("pageshow", function (event) {
   });
 })();
 function toggleDropdown(selectEl) {
-  // Close all other dropdowns
+  
   const allSelects = document.querySelectorAll('.custom-select');
   allSelects.forEach(el => {
     if (el !== selectEl) el.classList.remove('active');
@@ -345,16 +368,20 @@ function toggleDropdown(selectEl) {
 
 function selectItem(li, event) {
   event.stopPropagation(); 
+
   const customSelect = li.closest('.custom-select');
   const selected = customSelect.querySelector('.selected');
   const hiddenInput = customSelect.querySelector('input[type="hidden"]');
+  const defaultText = selected.getAttribute('data-default');
 
   selected.textContent = li.textContent;
   hiddenInput.value = li.textContent;
   customSelect.classList.remove('active');
 
-  const defaultText = selected.getAttribute('data-default');
-  if (li.textContent !== defaultText) {
+  selected.classList.remove('input-error');
+  hiddenInput.classList.remove('input-error');
+
+ if (li.textContent !== defaultText) {
     customSelect.classList.add('has-value');
   } else {
     customSelect.classList.remove('has-value');
@@ -380,4 +407,3 @@ document.addEventListener('click', function (e) {
     }
   });
 });
-
