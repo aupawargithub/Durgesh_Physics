@@ -827,7 +827,7 @@ form,
 
 
 .custom-select.active .dropdown-list {
-  max-height: 100px;
+  max-height: 130px;
   opacity: 1;
   overflow-y: auto;
   transform: translateY(0); 
@@ -1530,20 +1530,8 @@ font-weight: 200;
     <h2><i class="fas fa-user-plus"></i>Register Now</h2>
   <form onsubmit="handleContactForm(event)">
       <input name="entry.1234567890" type="text" placeholder="Your Full Name" required>
-      <input name="entry.0987654321" type="email" placeholder="Your Email" required>
-      <input 
-  name="entry.1122334455" 
-  type="tel" 
-  placeholder="Mobile Number" 
-  required 
-  pattern="\d{10}" 
-  minlength="10" 
-  maxlength="10" 
-  title="Please enter exactly 10 digits" 
->
 
-    
-<div class="custom-select" onclick="toggleDropdown(this)">
+	  <div class="custom-select" onclick="toggleDropdown(this)">
   <div class="selected" data-default="Select Your Class">Select Your Class</div>
   <ul class="dropdown-list">
     <li onclick="selectItem(this, event)">9th</li>
@@ -1565,9 +1553,19 @@ font-weight: 200;
   </ul>
   <input type="hidden" name="entry.course" required>
 </div>
+      <input name="entry.0987654321" type="email" placeholder="Your Email" required>
+      <input 
+  name="entry.1122334455" 
+  type="tel" 
+  placeholder="Mobile Number" 
+  required 
+  pattern="\d{10}" 
+  minlength="10" 
+  maxlength="10" 
+  title="Please enter exactly 10 digits" 
+>
 
-
-      <button type="submit">Submit</button>
+ <button type="submit">Submit</button>
     </form>
   </section>
 
